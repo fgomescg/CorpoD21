@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/toolbar_actionbar"
+    android:minHeight="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:gravity="bottom"
+    android:layout_height="@dimen/toolbar_x2" >
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:id="@+id/header_recap"
+        tools:showIn="@layout/demo_fragment_native_card">
+
+
+        <LinearLayout
+            android:id="@+id/header_contents"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <!-- Session title -->
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Title"
+                android:id="@+id/header_title"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="@color/body_text_1_inverse"
+                />
+
+            <!-- Session subtitle -->
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="SubTitle"
+                android:id="@+id/header_subtitle"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+                android:textColor="@color/body_text_2_inverse"
+                />
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/bar_button_source"
+            android:layout_width="@dimen/hd_fab_size"
+            android:layout_height="@dimen/hd_fab_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:elevation="2dp"
+            />
+
+    </FrameLayout>
+
+</android.support.v7.widget.Toolbar>

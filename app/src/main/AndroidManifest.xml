@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="corpode21.com.br.corpod21" >
+
+    <!-- Connect to Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Test"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppThemeWindowNoTitle"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".ui.LoginActivity2"
+            android:label="@string/title_activity_login_activity2"
+            android:theme="@style/AppThemeWindowNoTitle"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo0Activity"
+            android:label="@string/title_activity_modulo0" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo01Activity"
+            android:label="@string/title_activity_modulo01" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo02Activity"
+            android:label="@string/title_activity_modulo02" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo03Activity"
+            android:label="@string/title_activity_modulo03" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo04Activity"
+            android:label="@string/title_activity_modulo04" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo05Activity"
+            android:label="@string/title_activity_modulo05" >
+        </activity>
+        <activity
+            android:name=".ui.Modulo06Activity"
+            android:label="@string/title_activity_modulo06" >
+        </activity>
+        <activity
+            android:name=".ui.VideoPlayerActivity"
+            android:label="@string/title_activity_video_player" >
+        </activity>
+        <activity
+            android:name=".ui.VideoActivity"
+            android:label="@string/title_activity_video" >
+        </activity>
+        <activity
+            android:name=".ui.BonusPalestraMarciaActivity"
+            android:label="BonusPalestraMarciaActivity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusCompulsaoAlimentActivity"
+            android:label="BonusCompulsaoAlimentActivity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusPalestraRelacionamentoActivity"
+            android:label="BonusPalestraRelacionamentoActivity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusExAbdomenActivity"
+            android:label="BonusExAbdomenActivity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusDetoxActivity"
+            android:label="BonusDetoxActivity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusDietaC21Activity"
+            android:label="BonusDietaC21Activity" >
+        </activity>
+        <activity
+            android:name=".ui.BonusPilatesCasaActivity"
+            android:label="BonusPilatesCasaActivity" >
+        </activity>
+    </application>
+
+</manifest>

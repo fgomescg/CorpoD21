@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+
+
+    <!--Material design-->
+    <dimen name="navdrawer_width">304dp</dimen>
+    <dimen name="navdrawer_image_height">145dp</dimen>
+
+    <dimen name="headerbar_elevation">2dp</dimen>
+
+    <dimen name="hd_fab_size">52dp</dimen>
+    <dimen name="hd_button_elevation">2dp</dimen>
+    <dimen name="hd_button_press_elevation">4dp</dimen>
+    <dimen name="toolbar_x2">112dp</dimen>
+    <dimen name="circle_elevation">4dp</dimen>
+    <dimen name="circle_size">70dp</dimen>
+    <dimen name="carddemo_list_padding">8dp</dimen>
+    <dimen name="carddemo_gricursor_width">125dp</dimen>
+</resources>
