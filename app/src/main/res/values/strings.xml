@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CorpoD21</string>
 
+    <string name="modulos">Módulos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
@@ -64,7 +65,7 @@
     <string name="almoco">Almoço</string>
     <string name="lanche_tarde">Lanche da Tarde</string>
     <string name="jantar">Jantar</string>
-    <string name="ceia">Ceiaaaa</string>
+    <string name="ceia">Ceia</string>
 
     <string name="cafe_manha_item">Farelo de Aveia</string>
     <string name="cafe_manha_item_qtd">2 colheres</string>

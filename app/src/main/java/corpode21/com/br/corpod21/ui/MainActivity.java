@@ -15,6 +15,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         setupDefaultNavDrawer();
 
+
+        selectItemMenu(MENU_MODULOS);
+
     }
 
 }

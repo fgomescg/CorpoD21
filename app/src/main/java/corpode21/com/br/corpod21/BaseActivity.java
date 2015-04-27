@@ -32,14 +32,14 @@ import corpode21.com.br.corpod21.fragments.ModulosFragment;
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
-    private static final int MENU_MODULOS = 1;
-    private static final int MENU_BONUS = 2;
-    private static final int MENU_DESAFIO_SEMANA = 3;
-    private static final int MENU_CARDAPIO = 4;
-    private static final int MENU_EVOLUCAO = 5;
-    private static final int MENU_ALERTAS = 6;
-    private static final int MENU_DUVIDAS = 7;
-    private static final int MENU_CONTATO = 8;
+    public static final int MENU_MODULOS = 1;
+    public static final int MENU_BONUS = 2;
+    public static final int MENU_DESAFIO_SEMANA = 3;
+    public static final int MENU_CARDAPIO = 4;
+    public static final int MENU_EVOLUCAO = 5;
+    public static final int MENU_ALERTAS = 6;
+    public static final int MENU_DUVIDAS = 7;
+    public static final int MENU_CONTATO = 8;
 
     String TITLES[] = {"Módulos","Bônus","Desafio da Semana","Cardápios", "Evolução", "Alertas","Dúvidas Frequentes","Contato"};
     int ICONS[] = {
@@ -174,7 +174,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
                     Drawer.closeDrawers();
                     //Toast.makeText(MainActivity.this, "The Item Clicked is: " + recyclerView.getChildPosition(child), Toast.LENGTH_SHORT).show();
-                    selectItem(recyclerView.getChildPosition(child));
+                    selectItemMenu(recyclerView.getChildPosition(child));
                     return true;
                 }
                 return false;
@@ -211,7 +211,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
 
-    private void selectItem(int position) {
+    public void selectItemMenu(int position) {
         // update the main content by replacing fragments
         switch (position)
         {
