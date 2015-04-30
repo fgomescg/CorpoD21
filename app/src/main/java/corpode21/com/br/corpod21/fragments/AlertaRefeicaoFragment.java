@@ -35,13 +35,15 @@ public class AlertaRefeicaoFragment extends Fragment implements
 
     private TextView horaCafeManha;
     private TextView horaLancheManha;
+    private TextView horaAlmoco;
+    private TextView horaLancheTarde;
+    private TextView horaJantar;
+    private TextView horaCeia;
 
     private Switch sw_refeicao;
     private ImageView img_hora_edit;
     List<ImageView> buttons = new ArrayList<ImageView>();
     ViewGroup Container;
-
-
 
     SessionManager session;
 
@@ -58,8 +60,25 @@ public class AlertaRefeicaoFragment extends Fragment implements
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.alerta_refeicao_fragment, container, false);
-
         Container = container;
+
+        ImageView clockCafe = (ImageView) v.findViewById(R.id.clockCafe);
+        clockCafe.setOnClickListener(this);
+
+        ImageView clockLancheManha = (ImageView) v.findViewById(R.id.clockLancheManha);
+        clockLancheManha.setOnClickListener(this);
+
+        ImageView clockAlmoco = (ImageView) v.findViewById(R.id.clockAlmoco);
+        clockAlmoco.setOnClickListener(this);
+
+        ImageView clockLancheTarde = (ImageView) v.findViewById(R.id.clockLancheTarde);
+        clockLancheTarde.setOnClickListener(this);
+
+        ImageView clockJantar = (ImageView) v.findViewById(R.id.clockJantar);
+        clockJantar.setOnClickListener(this);
+
+        ImageView clockCeia = (ImageView) v.findViewById(R.id.clockCeia);
+        clockCeia.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return v;
@@ -78,13 +97,19 @@ public class AlertaRefeicaoFragment extends Fragment implements
         //NAME = user.get(SessionManager.KEY_NAME);
         //EMAIL = user.get(SessionManager.KEY_EMAIL);
 
+
         horaCafeManha = (TextView) getActivity().findViewById(R.id.horaCafeManha);
         horaLancheManha = (TextView) getActivity().findViewById(R.id.horaLancheManha);
-
+        horaAlmoco = (TextView) getActivity().findViewById(R.id.horaAlmoco);
+        horaLancheTarde = (TextView) getActivity().findViewById(R.id.horaLancheTarde);
+        horaJantar = (TextView) getActivity().findViewById(R.id.horaJantar);
+        horaCeia = (TextView) getActivity().findViewById(R.id.horaCeia);
         sw_refeicao = (Switch) getActivity().findViewById(R.id.switchRefeicao);
 
         //set the switch to ON
         //sw_refeicao.setChecked(true);
+
+
 
         //attach a listener to check for changes in state
         sw_refeicao.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -93,15 +118,64 @@ public class AlertaRefeicaoFragment extends Fragment implements
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
 
-                if(isChecked){
-                    sw_refeicao.setText("Switch is currently ON");
-                }else{
-                    sw_refeicao.setText("Switch is currently OFF");
-                }
+                final String tag = buttonView.getTag().toString();
+                final String onOFF = (isChecked) ? "1" : "0";
 
+                switch (tag) {
+                    case "Cafe":
+                      session.setUserDetails(session.KEY_NCAFE, onOFF);
+                        break;
+                    case "LancheManha":
+                        session.setUserDetails(session.KEY_NLANCHEMANHA, onOFF);
+                        break;
+                    case "Almoco":
+                        session.setUserDetails(session.KEY_NALMOCO, onOFF);
+                        break;
+                    case "LancheTarde":
+                        session.setUserDetails(session.KEY_NLANCHETARDE, onOFF);
+                        break;
+                    case "Jantar":
+                        session.setUserDetails(session.KEY_NJANTAR, onOFF);
+                        break;
+                    case "Ceia":
+                        session.setUserDetails(session.KEY_NCEIA, onOFF);
+                        break;
+                }
             }
         });
     }
+
+    private CompoundButton.OnCheckedChangeListener switchClick = new CompoundButton.OnCheckedChangeListener(){
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,
+                                     boolean isChecked) {
+
+            final String tag = buttonView.getTag().toString();
+            final String onOFF = (isChecked) ? "1" : "0";
+
+            switch (tag) {
+                case "Cafe":
+                    session.setUserDetails(session.KEY_NCAFE, onOFF);
+                    break;
+                case "LancheManha":
+                    session.setUserDetails(session.KEY_NLANCHEMANHA, onOFF);
+                    break;
+                case "Almoco":
+                    session.setUserDetails(session.KEY_NALMOCO, onOFF);
+                    break;
+                case "LancheTarde":
+                    session.setUserDetails(session.KEY_NLANCHETARDE, onOFF);
+                    break;
+                case "Jantar":
+                    session.setUserDetails(session.KEY_NJANTAR, onOFF);
+                    break;
+                case "Ceia":
+                    session.setUserDetails(session.KEY_NCEIA, onOFF);
+                    break;
+            }
+        }
+    };
+
 
     /** Add padding to numbers less than ten */
     private static String pad(int c) {
@@ -135,6 +209,18 @@ public class AlertaRefeicaoFragment extends Fragment implements
                                     break;
                                 case "LancheManha":
                                     horaLancheManha.setText(hourOfDay + ":" + minute);
+                                    break;
+                                case "Almoco":
+                                    horaAlmoco.setText(hourOfDay + ":" + minute);
+                                    break;
+                                case "LancheTarde":
+                                    horaLancheTarde.setText(hourOfDay + ":" + minute);
+                                    break;
+                                case "Jantar":
+                                    horaJantar.setText(hourOfDay + ":" + minute);
+                                    break;
+                                case "Ceia":
+                                    horaCeia.setText(hourOfDay + ":" + minute);
                                     break;
                             }
                         }
