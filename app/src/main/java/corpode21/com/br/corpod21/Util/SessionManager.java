@@ -8,13 +8,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.ui.LoginActivity;
 import corpode21.com.br.corpod21.entidades.Usuario;
 
 public class SessionManager {
     // Shared Preferences
     SharedPreferences pref;
+    SharedPreferences pref_email;
 
+
+    private static final String PREF_EMAIL_USER = "c21_user_email";
+
+    private static final String PREF_USER = "c21_user_";
     // Editor for Shared preferences
     Editor editor;
 
@@ -23,9 +29,6 @@ public class SessionManager {
 
     // Shared pref mode
     int PRIVATE_MODE = 0;
-
-    // Sharedpref file name
-    private static final String PREF_NAME = "CorpoD21";
 
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
@@ -41,11 +44,35 @@ public class SessionManager {
     public static final String KEY_QUADRIL = "quadril";
     public static final String KEY_PERNA = "perna";
 
+    public static final String KEY_HCAFE = "hCafe";
+    public static final String KEY_NCAFE = "nCafe";
+    public static final String KEY_HLANCHEMANHA = "hLancheManha";
+    public static final String KEY_NLANCHEMANHA = "nLancheManha";
+    public static final String KEY_HALMOCO = "hAlmoco";
+    public static final String KEY_NALMOCO = "nAlmoco";
+    public static final String KEY_HLANCHETARDE = "hLancheTarde";
+    public static final String KEY_NLANCHETARDE = "nLancheTarde";
+    public static final String KEY_HJANTAR = "hJantar";
+    public static final String KEY_NJANTAR = "nJantar";
+    public static final String KEY_HCEIA = "hCeia";
+    public static final String KEY_NCEIA = "nCeia";
+
+
+
     // Constructor
     public SessionManager(Context context) {
         this._context = context;
-        pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
-        editor = pref.edit();
+
+        pref_email = _context.getSharedPreferences(PREF_EMAIL_USER, PRIVATE_MODE);
+
+        String email = pref_email.getString("email",null);
+
+        if(email != null)
+            pref = _context.getSharedPreferences(PREF_USER+email, PRIVATE_MODE);
+        else
+            pref = _context.getSharedPreferences(PREF_USER, PRIVATE_MODE);
+
+            editor = pref.edit();
     }
 
     public void createLoginSession(Usuario usuario){
@@ -63,10 +90,30 @@ public class SessionManager {
         editor.putString(KEY_QUADRIL, String.valueOf(usuario.getQuadril()));
         editor.putString(KEY_PERNA, String.valueOf(usuario.getPerna()));
 
+        editor.putString(KEY_HCAFE, "07:00");
+        editor.putString(KEY_HLANCHEMANHA, "09:30");
+        editor.putString(KEY_HALMOCO, "12:00");
+        editor.putString(KEY_HLANCHETARDE, "15:30");
+        editor.putString(KEY_HJANTAR, "19:00");
+        editor.putString(KEY_HCEIA, "22:00");
+
+        editor.putString(KEY_NCAFE, String.valueOf(0));
+        editor.putString(KEY_NLANCHEMANHA, String.valueOf(0));
+        editor.putString(KEY_NALMOCO, String.valueOf(0));
+        editor.putString(KEY_NLANCHETARDE, String.valueOf(0));
+        editor.putString(KEY_NJANTAR, String.valueOf(0));
+        editor.putString(KEY_NCEIA, String.valueOf(0));
         // commit changes
         editor.commit();
     }
 
+    public void setUserDetails(String KEY, String VALUE)
+    {
+        editor.putString(KEY, VALUE);
+        editor.commit();
+    }
+
+    public String getVALUE(String KEY) { return pref.getString(KEY,null);  }
     /**
      * Get stored session data
      * */
@@ -115,7 +162,7 @@ public class SessionManager {
      * */
     public void logoutUser(){
         // Clearing all data from Shared Preferences
-        editor.clear();
+        editor.putBoolean(IS_LOGIN, false);
         editor.commit();
 
         // After logout redirect user to Loing Activity

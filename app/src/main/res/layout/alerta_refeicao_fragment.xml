@@ -33,13 +33,13 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:tag="Cafe"
-            android:onClick="onClick"
-            android:src="@mipmap/ic_action"/>
+            android:src="@mipmap/ic_action"
+            android:id="@+id/clockCafe" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/horaCafeManha"
+            android:id="@+id/horaCafe"
             android:tag="Cafe"
             android:text="08:00"
             style="@style/cardapio_item"
@@ -54,7 +54,7 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/switchCafeManha"
+            android:id="@+id/switchCafe"
             android:tag="Cafe"
             android:gravity="right" />
 
@@ -86,8 +86,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:tag="LancheManha"
-                android:onClick="onClick"
-                android:src="@mipmap/ic_action"/>
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockLancheManha" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/imgHoraEdit"
+                    android:id="@+id/clockAlmoco"
                     android:tag="Almoco"
                     android:onClick="onClick"
                     android:src="@mipmap/ic_action"/>
@@ -146,7 +146,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/hora_refeicao"
+                    android:id="@+id/horaAlmoco"
                     android:tag="Almoco"
                     android:text="08:00"
                     style="@style/cardapio_item"
@@ -161,7 +161,7 @@
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/switchRefeicao"
+                    android:id="@+id/switchAlmoco"
                     android:tag="Almoco"
                     android:gravity="right" />
 
@@ -192,7 +192,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/imgHoraEdit"
+                android:id="@+id/clockLancheTarde"
                 android:tag="LancheTarde"
                 android:onClick="onClick"
                 android:src="@mipmap/ic_action"/>
@@ -200,7 +200,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hora_refeicao"
+                android:id="@+id/horaLancheTarde"
                 android:tag="LancheTarde"
                 android:text="08:00"
                 style="@style/cardapio_item"
@@ -215,7 +215,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/switchRefeicao"
+                android:id="@+id/switchLancheTarde"
                 android:tag="LancheTarde"
                 android:gravity="right" />
 
@@ -246,7 +246,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/imgHoraEdit"
+                android:id="@+id/clockJantar"
                 android:onClick="onClick"
                 android:tag="Jantar"
                 android:src="@mipmap/ic_action"/>
@@ -254,7 +254,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hora_refeicao"
+                android:id="@+id/horaJantar"
                 android:tag="Jantar"
                 android:text="08:00"
                 style="@style/cardapio_item"
@@ -269,7 +269,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/switchRefeicao"
+                android:id="@+id/switchJantar"
                 android:tag="Jantar"
                 android:gravity="right" />
 
@@ -300,7 +300,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/imgHoraEdit"
+                android:id="@+id/clockCeia"
                 android:tag="Ceia"
                 android:onClick="onClick"
                 android:src="@mipmap/ic_action"/>
@@ -308,7 +308,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hora_refeicao"
+                android:id="@+id/horaCeia"
                 android:tag="Ceia"
                 android:text="08:00"
                 style="@style/cardapio_item"
@@ -323,7 +323,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/switchRefeicao"
+                android:id="@+id/switchCeia"
                 android:tag="Ceia"
                 android:gravity="right" />
 

@@ -3,6 +3,7 @@ package corpode21.com.br.corpod21.ui;
 import android.app.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.util.Patterns;
@@ -69,6 +70,11 @@ public class LoginActivity extends Activity  implements View.OnClickListener {
             if(ok){
 
                 usuario = new Usuario(nome,email,senha,0,0,0,0,0,0,0,null);
+
+                SharedPreferences prefs = getSharedPreferences("c21_user_email", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("email", email);
+                editor.commit();
 
                 Intent it = new Intent(getApplicationContext(), LoginActivity2.class);
                 it.putExtra("Usuario", usuario);

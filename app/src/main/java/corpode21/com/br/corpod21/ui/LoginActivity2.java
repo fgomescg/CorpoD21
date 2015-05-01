@@ -47,8 +47,6 @@ public class LoginActivity2 extends Activity implements View.OnClickListener{
         btnConcluir = (Button) findViewById(R.id.btnConcluir);
         btnConcluir.setOnClickListener(this);
 
-        // Session Manager
-         session = new SessionManager(getApplicationContext());
 
     }
 
@@ -87,6 +85,9 @@ public class LoginActivity2 extends Activity implements View.OnClickListener{
 
             if(!edtPerna.getText().toString().equalsIgnoreCase(""))
                 usuario.setPerna(Float.parseFloat(edtPerna.getText().toString()));
+
+            // Session Manager
+            session = new SessionManager(getApplicationContext());
 
             session.createLoginSession(usuario);
 

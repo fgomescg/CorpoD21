@@ -69,8 +69,8 @@
 
     <string name="cafe_manha_item">Farelo de Aveia</string>
     <string name="cafe_manha_item_qtd">2 colheres</string>
-
-
+    <string name="title_activity_teste_notificacao">TesteNotificacao</string>
+    <string name="title_activity_detalhe">DetalheActivity</string>
 
 
     <!--"Dificuldade: Fácil\nTempo de Video: 05:16\nNeste vídeo vou te mostrar como contrair o abdômen. Você irá aprender e aplicar em todo o curso."
