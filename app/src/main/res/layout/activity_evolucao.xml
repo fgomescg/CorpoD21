@@ -1,0 +1,186 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/viewChart"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/medidas"
+            style="@style/cardapio_titulo"
+            android:gravity="center"
+            android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medidas"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inicial"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/atual"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/biceps"
+                style="@style/cardapio_titulo"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16sp"   />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/iniBiceps"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/atualBiceps"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cintura"
+                style="@style/cardapio_titulo"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16sp"   />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/iniCintura"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/atualCintura"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quadril"
+                style="@style/cardapio_titulo"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16sp"   />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/iniQuadril"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/atualQuadril"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perna"
+                style="@style/cardapio_titulo"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="16sp"   />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/iniPerna"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                style="@style/cardapio_titulo"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:id="@+id/atualPerna"/>
+
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Atualizar Dados"
+            android:background="@color/VermelhoBotao"
+            android:textColor="@color/TextoBranco"
+            android:id="@+id/btnLogin"  />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

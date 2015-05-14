@@ -1,6 +1,8 @@
 package corpode21.com.br.corpod21;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -26,6 +28,8 @@ import corpode21.com.br.corpod21.fragments.BonusFragment;
 import corpode21.com.br.corpod21.fragments.CardapioFragment;
 import corpode21.com.br.corpod21.fragments.DesafioSemanaFragment;
 import corpode21.com.br.corpod21.fragments.ModulosFragment;
+import corpode21.com.br.corpod21.ui.EvolucaoActivity;
+import corpode21.com.br.corpod21.ui.LoginActivity2;
 
 /**
  * Created by Fabio on 09/04/2015.
@@ -144,6 +148,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     {
         mToolBar.setTitle(s);
     }
+
+
     //----------------------------------------------------------------------------
     // Navigation Drawer
     //----------------------------------------------------------------------------
@@ -226,6 +232,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             case MENU_DESAFIO_SEMANA:
                 openFragment(new DesafioSemanaFragment());
                 break;
+            case MENU_EVOLUCAO:
+                goActivity(EvolucaoActivity.class);
+                break;
             case MENU_CARDAPIO:
                 openFragment(new CardapioFragment());
                 break;
@@ -240,6 +249,14 @@ public abstract class BaseActivity extends ActionBarActivity {
         //mDrawerList.setItemChecked(position, true);
         //mDrawerLayout.closeDrawer(mDrawerList);
         Drawer.closeDrawers();
+    }
+
+
+    private void goActivity(Class c) {
+
+        Intent it = new Intent(this.getApplicationContext(), c);
+        //it.putExtra("Usuario", usuario);
+        startActivity(it);
     }
 
     private void openFragment(final Fragment fragment) {

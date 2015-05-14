@@ -123,9 +123,7 @@ public class ModulosFragment extends Fragment {
                 t2.setText(titulo2);
         }
 
-        public void setTitulo1(String titulo1) {
-            this.titulo1=titulo1;
-        }
+        public void setTitulo1(String titulo1) { this.titulo1=titulo1; }
 
         public void setTitulo2(String titulo2) {
             this.titulo2=titulo2;

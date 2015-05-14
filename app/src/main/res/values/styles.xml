@@ -30,6 +30,8 @@
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:homeAsUpIndicator">@mipmap/ic_up21</item>
 
+        <item name="android:editTextStyle">@style/SingleLineEdit</item>
+
     </style>
 
     <style name="AppThemeWindowNoTitle" parent="android:Theme">
@@ -59,4 +61,11 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="SingleLineEdit" parent="@android:style/Widget.EditText">
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@drawable/edittext_rounded</item>
+        <item name="android:textColorHint">@color/button_material_light</item>
+    </style>
 </resources>

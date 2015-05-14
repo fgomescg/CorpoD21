@@ -4,28 +4,33 @@ package corpode21.com.br.corpod21.fragments;
  * Created by Fabio on 15/04/2015.
  */
 
-
+import android.app.DownloadManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.Util.SessionManager;
 
+import corpode21.com.br.corpod21.service.ScheduleClient;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -46,7 +51,6 @@ public class AlertaRefeicaoFragment extends Fragment implements
     private Switch switchLancheTarde;
     private Switch switchJantar;
     private Switch switchCeia;
-
 
     SessionManager session;
 
@@ -91,12 +95,9 @@ public class AlertaRefeicaoFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
 
         session = new SessionManager(getActivity().getApplicationContext());
-
         session.checkLogin();
-        // get user data from session
+
         HashMap<String, String> user = session.getUserDetails();
-        //NAME = user.get(SessionManager.KEY_NAME);
-        //EMAIL = user.get(SessionManager.KEY_EMAIL);
 
         horaCafeManha = (TextView) getActivity().findViewById(R.id.horaCafe);
         horaLancheManha = (TextView) getActivity().findViewById(R.id.horaLancheManha);
@@ -117,9 +118,11 @@ public class AlertaRefeicaoFragment extends Fragment implements
         switchAlmoco.setOnCheckedChangeListener(switchClick);
         switchLancheTarde.setOnCheckedChangeListener(switchClick);
         switchJantar.setOnCheckedChangeListener(switchClick);
-        switchCeia = (Switch) getActivity().findViewById(R.id.switchCeia);
+        switchCeia.setOnCheckedChangeListener(switchClick);
 
+        porra();
         initFragment();
+
     }
 
     private void initFragment()
@@ -193,15 +196,45 @@ public class AlertaRefeicaoFragment extends Fragment implements
             return "0" + String.valueOf(c);
     }
 
+
+
     @Override
     public void onClick(View v) {
 
         final String tag = v.getTag().toString();
 
             // Process to get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
+           // final Calendar c = Calendar.getInstance();
+           // mHour = c.get(Calendar.HOUR_OF_DAY);
+           // mMinute = c.get(Calendar.MINUTE);
+
+                switch (tag) {
+                    case "Cafe":
+                        mHour = Integer.parseInt(horaCafeManha.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaCafeManha.getText().toString().substring(3,5));
+                        break;
+                    case "LancheManha":
+                        mHour = Integer.parseInt(horaLancheManha.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaLancheManha.getText().toString().substring(3,5));
+                        break;
+                    case "Almoco":
+                        mHour = Integer.parseInt(horaAlmoco.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaAlmoco.getText().toString().substring(3,5));
+                        break;
+                    case "LancheTarde":
+                        mHour = Integer.parseInt(horaLancheTarde.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaLancheTarde.getText().toString().substring(3,5));
+                        break;
+                    case "Jantar":
+                        mHour = Integer.parseInt(horaJantar.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaJantar.getText().toString().substring(3,5));
+                        break;
+                    case "Ceia":
+                        mHour = Integer.parseInt(horaCeia.getText().toString().substring(0, 2));
+                        mMinute = Integer.parseInt(horaCeia.getText().toString().substring(3,5));
+                        break;
+                }
+
 
             // Launch Time Picker Dialog
             TimePickerDialog tpd = new TimePickerDialog(getActivity(),
@@ -242,6 +275,45 @@ public class AlertaRefeicaoFragment extends Fragment implements
                     }, mHour, mMinute, false);
             tpd.show();
         }
+
+
+
+    private void porra()    {
+
+        String url = "http://www.orbitaldev.com.br/Mobile.mp4";
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setDescription("Some descrition");
+        request.setTitle("Some title");
+// in order for this if to run, you must use the android 3.2 to compile your app
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        }
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Mobile.mp4");
+
+// get download service and enqueue file
+        DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+    }
+    /**
+     * @param context used to check the device version and DownloadManager information
+     * @return true if the download manager is available
+     */
+    public static boolean isDownloadManagerAvailable(Context context) {
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+                return false;
+            }
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setClassName("com.android.providers.downloads.ui", "com.android.providers.downloads.ui.DownloadList");
+            List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY);
+            return list.size() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 
 }

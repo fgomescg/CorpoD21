@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:padding="30dp"
+    android:padding="50dp"
     android:background="#ffb2b2b2" >
 
 
@@ -14,112 +14,100 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/QuaseLa"
-            android:id="@+id/txtQuasela"
-            />
+            android:textColor="@color/abc_primary_text_material_light"
+            android:gravity="center"
+            android:paddingBottom="10dp"/>
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:imeOptions="actionNext"
             android:hint="Peso inicial*"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtPesoIni"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginBottom="2dp"
+            android:layout_gravity="center"
+            style="@style/SingleLineEdit"/>
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:imeOptions="actionNext"
             android:hint="Altura*"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtAltura"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal" />
+            style="@style/SingleLineEdit"
+            android:layout_marginBottom="2dp"
+            android:layout_gravity="center"/>
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:hint="Peso Meta*"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtPesoMeta"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginBottom="2dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/SingleLineEdit"/>
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:hint="Biceps"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtBiceps"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
+            style="@style/SingleLineEdit"
+            android:layout_marginBottom="2dp"
             android:layout_gravity="center_horizontal" />
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:hint="Cintura"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtCintura"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
+            style="@style/SingleLineEdit"
+            android:layout_marginBottom="2dp"
             android:layout_gravity="center_horizontal" />
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:hint="Quadril"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtQuadril"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
+            style="@style/SingleLineEdit"
+            android:layout_marginBottom="2dp"
             android:layout_gravity="center_horizontal" />
 
         <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:hint="Perna"
             android:inputType="numberDecimal|numberSigned"
             android:id="@+id/edtPerna"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
+            style="@style/SingleLineEdit"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/LinkPrivacidade"
             android:id="@+id/LinkPrivacidade"
-
-            />
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:gravity="center" />
 
         <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:text="CONCLUIR"
-            android:background="@color/VermelhoBotao"
+            android:background="@drawable/button_rounded"
             android:textColor="@color/TextoBranco"
             android:id="@+id/btnConcluir"
             />

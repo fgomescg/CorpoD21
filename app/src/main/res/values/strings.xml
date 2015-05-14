@@ -67,10 +67,25 @@
     <string name="jantar">Jantar</string>
     <string name="ceia">Ceia</string>
 
+    <string name="medidas">Medidas</string>
+
+    <string name="inicial">Inicial</string>
+    <string name="atual">Atual</string>
+
+    <string name="biceps">Biceps</string>
+    <string name="cintura">Cintura</string>
+    <string name="quadril">Quadril</string>
+    <string name="perna">Perna</string>
+
     <string name="cafe_manha_item">Farelo de Aveia</string>
     <string name="cafe_manha_item_qtd">2 colheres</string>
     <string name="title_activity_teste_notificacao">TesteNotificacao</string>
     <string name="title_activity_detalhe">DetalheActivity</string>
+    <string name="title_activity_evolucao">EvolucaoActivity</string>
+    <string name="title_activity_modulos">ModulosActivity</string>
+    <string name="title_activity_n">NActivity</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_video_test">VideoTestActivity</string>
 
 
     <!--"Dificuldade: Fácil\nTempo de Video: 05:16\nNeste vídeo vou te mostrar como contrair o abdômen. Você irá aprender e aplicar em todo o curso."

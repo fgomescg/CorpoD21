@@ -3,69 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical" >
+
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar">
     </include>
 
-     <!--   <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textViewTitulo"
-            android:paddingTop="25dp"
-            android:paddingBottom="5dp"
-            android:layout_gravity="center_horizontal" />
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/videoView"
+        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Medium Text"
-            android:id="@+id/textViewSubTitulo"
-            android:paddingBottom="6dp"
-            android:layout_gravity="center_horizontal" /> -->
+    <corpode21.com.br.corpod21.Util.Chronometer
+              android:id="@+id/chronometer"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:textSize="26sp"/>
 
-        <WebView
-            android:id="@+id/video_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center">
 
-        <corpode21.com.br.corpod21.Util.Chronometer
-            android:id="@+id/chronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="26sp"/>
+          <Button
+              android:id="@+id/button1"
+              android:layout_width="wrap_content"
+              android:layout_height="85dp"
+              android:text="Iniciar"
+              android:background="@drawable/round"
+              android:onClick="startChronometer"
+              android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+          <Button
+              android:id="@+id/button2"
+              android:layout_width="wrap_content"
+              android:layout_height="85dp"
+              android:text="Parar"
+              android:background="@drawable/round"
+              android:onClick="stopChronometer"
+              android:layout_gravity="center_horizontal"/>
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:text="Iniciar"
-            android:background="@drawable/round"
-            android:onClick="startChronometer"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:text="Parar"
-            android:background="@drawable/round"
-            android:onClick="stopChronometer"
-            android:layout_gravity="center_horizontal"/>
-
-    </LinearLayout>
+      </LinearLayout>
 
 </LinearLayout>
