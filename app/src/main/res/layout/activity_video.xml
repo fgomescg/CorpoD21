@@ -1,8 +1,8 @@
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <include
@@ -10,25 +10,22 @@
         layout="@layout/tool_bar">
     </include>
 
-    <VideoView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/videoView"
-        />
 
-    <corpode21.com.br.corpod21.Util.Chronometer
-              android:id="@+id/chronometer"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:textSize="26sp"/>
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_gravity="center|bottom">
 
-      <LinearLayout
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center">
+            <corpode21.com.br.corpod21.Util.Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="26sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
           <Button
               android:id="@+id/button1"
@@ -37,7 +34,10 @@
               android:text="Iniciar"
               android:background="@drawable/round"
               android:onClick="startChronometer"
-              android:layout_gravity="center_horizontal" />
+              android:layout_gravity="center_horizontal"
+              android:layout_centerVertical="true"
+              android:layout_toLeftOf="@+id/chronometer"
+              android:layout_toStartOf="@+id/chronometer" />
 
           <Button
               android:id="@+id/button2"
@@ -46,8 +46,16 @@
               android:text="Parar"
               android:background="@drawable/round"
               android:onClick="stopChronometer"
-              android:layout_gravity="center_horizontal"/>
+              android:layout_gravity="center_horizontal"
+              android:layout_alignBottom="@+id/button1"
+              android:layout_toRightOf="@+id/chronometer"
+              android:layout_toEndOf="@+id/chronometer" />
+    </RelativeLayout>
 
-      </LinearLayout>
+    <VideoView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/videoView"
+        android:layout_gravity="center" />
 
-</LinearLayout>
+</FrameLayout>
