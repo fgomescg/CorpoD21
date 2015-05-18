@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 
+import corpode21.com.br.corpod21.Util.Notifications;
 import corpode21.com.br.corpod21.ui.MainActivity;
 
 /**
@@ -25,6 +26,10 @@ import corpode21.com.br.corpod21.ui.MainActivity;
  * @author paul.blundell
  */
 public class NotifyService extends Service {
+
+    private static final int NOTIFICACAO_SIMPLES = 1;
+    private static final int NOTIFICACAO_COMPLETA = 2;
+    private static final int NOTIFICACAO_BIG = 3;
 
     /**
      * Class for clients to access
@@ -38,7 +43,7 @@ public class NotifyService extends Service {
     // Unique id to identify the notification.
     private static final int NOTIFICATION = 123;
     // Name of an intent extra we can use to identify if this service was started to create a notification
-    public static final String INTENT_NOTIFY = "com.br.notificacao.service.INTENT_NOTIFY";
+    public static final String INTENT_NOTIFY = "corpode21.com.br.corpod21.service.INTENT_NOTIFY";
     // The system notification manager
     private NotificationManager mNM;
 
@@ -72,28 +77,10 @@ public class NotifyService extends Service {
      * Creates a notification and shows it in the OS drag-down status bar
      */
     private void showNotification() {
-        // This is the 'title' of the notification
-        CharSequence title = "Alarm!!";
-        // This is the icon to use on the notification
-        int icon = R.drawable.ic_dialog_alert;
-        // This is the scrolling text of the notification
-        CharSequence text = "Your notification time is upon us.";
-        // What time to show on the notification
-        long time = System.currentTimeMillis();
 
-        Notification notification = new Notification(icon, text, time);
-
-        // The PendingIntent to launch our activity if the user selects this notification
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
-
-        // Set the info for the views that show in the notification panel.
-        notification.setLatestEventInfo(this, title, text, contentIntent);
-
-        // Clear the notification when it is pressed
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        // Send the notification to the system.
-        mNM.notify(NOTIFICATION, notification);
+        Notifications.criarNotificacaoSimples(this, "TESTE", NOTIFICACAO_SIMPLES);
+        Notifications.criarNotificacaoCompleta(this, "TESTE COMPLETA", NOTIFICACAO_COMPLETA);
+        Notifications.criarNotificationBig(this, NOTIFICACAO_BIG);
 
         // Stop the service when we are finished
         stopSelf();

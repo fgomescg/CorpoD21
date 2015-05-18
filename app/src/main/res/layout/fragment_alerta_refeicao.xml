@@ -1,0 +1,322 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="30dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cafe_manha"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="Cafe"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockCafe"
+                android:layout_alignTop="@+id/switchCafe"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaCafe"
+                android:tag="Cafe"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchCafe"
+                android:layout_toRightOf="@+id/clockCafe"
+                android:layout_toEndOf="@+id/clockCafe" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchCafe"
+                android:tag="Cafe"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lanche_manha"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="LancheManha"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockLancheManha"
+                android:layout_alignTop="@+id/switchLancheManha"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaLancheManha"
+                android:tag="LancheManha"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchLancheManha"
+                android:layout_toRightOf="@+id/clockLancheManha"
+                android:layout_toEndOf="@+id/clockLancheManha" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchLancheManha"
+                android:tag="LancheManha"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/almoco"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="Almoco"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockAlmoco"
+                android:layout_alignTop="@+id/switchAlmoco"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaAlmoco"
+                android:tag="Almoco"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchAlmoco"
+                android:layout_toRightOf="@+id/clockAlmoco"
+                android:layout_toEndOf="@+id/clockAlmoco" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchAlmoco"
+                android:tag="Almoco"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lanche_tarde"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="LancheTarde"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockLancheTarde"
+                android:layout_alignTop="@+id/switchLancheTarde"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaLancheTarde"
+                android:tag="LancheTarde"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchLancheTarde"
+                android:layout_toRightOf="@+id/clockLancheTarde"
+                android:layout_toEndOf="@+id/clockLancheTarde" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchLancheTarde"
+                android:tag="LancheTarde"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jantar"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="Jantar"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockJantar"
+                android:layout_alignTop="@+id/switchJantar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaJantar"
+                android:tag="Cafe"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchJantar"
+                android:layout_toRightOf="@+id/clockJantar"
+                android:layout_toEndOf="@+id/clockJantar" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchJantar"
+                android:tag="Jantar"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ceia"
+                style="@style/cardapio_titulo"
+                android:textSize="16sp"
+                android:id="@+id/textView"  />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tag="Ceia"
+                android:src="@mipmap/ic_action"
+                android:id="@+id/clockCeia"
+                android:layout_alignTop="@+id/switchCeia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horaCeia"
+                android:tag="Ceia"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/switchCeia"
+                android:layout_toRightOf="@+id/clockCeia"
+                android:layout_toEndOf="@+id/clockCeia" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchCeia"
+                android:tag="Ceia"
+                android:gravity="right"
+                android:layout_below="@+id/textView"
+                android:layout_alignRight="@+id/textView"
+                android:layout_alignEnd="@+id/textView" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -2,6 +2,7 @@ package corpode21.com.br.corpod21.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
@@ -17,11 +18,13 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,106 +42,51 @@ public class VideoActivity extends BaseSingleActivity {
 
     SessionManager session;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
-    private final String TituloPagina = "Vídeo 01";
+    private String TituloVideo;
     private Chronometer mChronometer;
-    private String urlVideo;
+
     private int position = 0;
     private VideoView mVideoView;
     private MediaController mediaControls;
-
-
     // declare the dialog as a member field of your activity
     ProgressDialog mProgressDialog;
 
-    @Override
+    //Nome do Vídeo
+    private String NomeVideo;
+    //Url onde será baixado o vídeo
+    private String urlBaseVideo;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
-        setActionBarBackArrow();
-        setBarTitle(TituloPagina);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-
         mVideoView = (VideoView)findViewById(R.id.videoView);
-        //set the media controller buttons
+        mChronometer = (Chronometer)findViewById(R.id.chronometer);
 
-        if (mediaControls == null) {
-            mediaControls = new MediaController(VideoActivity.this);
-        }
-
-        try {
-            //set the media controller in the VideoView
-            mVideoView.setMediaController(mediaControls);
-            //set the uri of the video to be played
-            mVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mobile));
-
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-
-
-        mVideoView.requestFocus();
-        //we also set an setOnPreparedListener in order to know when the video file is ready for playback
-        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                // close the progress bar and play the video
-                //progressDialog.dismiss();
-                //if we have a position on savedInstanceState, the video playback should start from here
-                mVideoView.seekTo(position);
-                if (position == 0) {
-                    mVideoView.start();
-                } else {
-                    //if we come from a resumed activity, video playback will be paused
-                    mVideoView.pause();
-                }
-            }
-        });
-
-
-       // mChronometer = (Chronometer)findViewById(R.id.chronometer);
         Intent it = getIntent();
+        urlBaseVideo = it.getStringExtra("URL_BASE");
+        NomeVideo = it.getStringExtra("NOME_VIDEO");
+        TituloVideo = it.getStringExtra("SUBTITULO_VIDEO");
 
-        urlVideo = it.getStringExtra("urlVideo");
+        setActionBarBackArrow();
+        setBarTitle(TituloVideo);
 
-        if(urlVideo != "")
-            IniciaVideo();
-
+        if(NomeVideo != "")
+            Init();
     }
-
-    private LinearLayout.LayoutParams paramsNotFullscreen;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        android.widget.LinearLayout.LayoutParams params = (android.widget.LinearLayout.LayoutParams) mVideoView.getLayoutParams();
-
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            setFullScreen();
 
-            toolbar.hideOverflowMenu(); // animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-            params.width =  metrics.widthPixels;
-            params.height = metrics.heightPixels;
-            params.leftMargin = 0;
-            mVideoView.setLayoutParams(params);
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-
-            toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
-
-            params.width = (int) (300*metrics.density);
-            params.height =  (int) (250*metrics.density);
-            params.leftMargin = 30;
-            mVideoView.setLayoutParams(params);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            leaveFullScreen();
         }
-
     }
 
     @Override
@@ -157,28 +105,6 @@ public class VideoActivity extends BaseSingleActivity {
         mVideoView.seekTo(position);
     }
 
-
-    protected void IniciaVideo()
-    {
-        mProgressDialog = new ProgressDialog(VideoActivity.this);
-        mProgressDialog.setMessage("A message");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
-
-        // execute this when the downloader must be fired
-        /*final DownloadTask downloadTask = new DownloadTask(VideoActivity.this);
-        downloadTask.execute("http://www.orbitaldev.com.br/Mobile.mp4");
-
-        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                downloadTask.cancel(true);
-            }
-        }); */
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -187,6 +113,99 @@ public class VideoActivity extends BaseSingleActivity {
     public void onPause() {
         super.onPause();
     }
+
+    //endregion
+
+
+    //Metodos
+    protected void Init()
+    {
+        File file = new File(this.getFilesDir() +"/"+ NomeVideo);
+        if(file.exists()) {
+            IniciarVideo();
+        }
+        else {
+            DownloadVideo();
+        }
+    }
+
+
+
+    protected void IniciarVideo()
+    {
+        try {
+            //set the uri of the video to be played
+            mVideoView.setVideoURI(Uri.parse(this.getFilesDir() +"/"+ NomeVideo));
+
+            mVideoView.requestFocus();
+            //we also set an setOnPreparedListener in order to know when the video file is ready for playback
+            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                        @Override
+                        public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
+                        /* * add media controller*/
+                            mediaControls = new MediaController(VideoActivity.this);
+                            mVideoView.setMediaController(mediaControls);
+                        /* * and set its position on screen */
+                            mediaControls.setAnchorView(mVideoView);
+                        }
+                    });
+                    // close the progress bar and play the video
+                    //progressDialog.dismiss();
+                    //if we have a position on savedInstanceState, the video playback should start from here
+                    mVideoView.seekTo(position);
+                    if (position == 0) {
+                        mVideoView.start();
+                    } else {
+                        //if we come from a resumed activity, video playback will be paused
+                        mVideoView.pause();
+                    }
+                }
+        });
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    protected void DownloadVideo()
+    {
+
+        mProgressDialog = new ProgressDialog(VideoActivity.this);
+        mProgressDialog.setMessage("Por favor, aguarde...");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(true);
+
+        final DownloadVideo downloadVideo = new DownloadVideo(VideoActivity.this);
+        downloadVideo.execute(urlBaseVideo + "/" + NomeVideo);
+
+        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                downloadVideo.cancel(true);
+            }
+        });
+    }
+
+    private void setFullScreen()
+    {
+        //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void leaveFullScreen()
+    {
+        //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+    }
+
 
     public void startChronometer(View view) {
         mChronometer.start();
@@ -199,12 +218,12 @@ public class VideoActivity extends BaseSingleActivity {
 
     // usually, subclasses of AsyncTask are declared inside the activity class.
 // that way, you can easily modify the UI thread from here
-    private class DownloadTask extends AsyncTask<String, Integer, String> {
+    private class DownloadVideo extends AsyncTask<String, Integer, String> {
 
         private Context context;
         private PowerManager.WakeLock mWakeLock;
 
-        public DownloadTask(Context context) {
+        public DownloadVideo(Context context) {
             this.context = context;
         }
 
@@ -237,12 +256,11 @@ public class VideoActivity extends BaseSingleActivity {
 
                 //Define InputStreams to read from the URLConnection.
                 //output = new FileOutputStream("/sdcard/file_name.extension");
-                Log.d("DIR",context.getCacheDir().toString());
+                Log.d("SALVANDO", context.getFilesDir() +"/"+ NomeVideo);
                 //FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
 
                 //output = new FileOutputStream(context.getCacheDir() + "/video.mp4");
-                output = new FileOutputStream("android:resource://corpode21.com.br.corpode21/raw/video.mp4");
-
+                output = new FileOutputStream(context.getFilesDir() +"/"+ NomeVideo);
 
                 byte data[] = new byte[4096];
 
@@ -306,7 +324,9 @@ public class VideoActivity extends BaseSingleActivity {
             if (result != null)
                 Toast.makeText(context,"Download error: "+result, Toast.LENGTH_LONG).show();
             else
-                Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,TituloVideo + " baixado com sucesso !", Toast.LENGTH_SHORT).show();
+                //Iniciar o vídeo após o download
+                IniciarVideo();
         }
 
     }

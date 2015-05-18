@@ -46,8 +46,11 @@
     <string name="ex_abdomen_m1">Exercícios para Abdômen (Módulo 1)</string>
     <string name="repita">Repita os 3 exercícios anteriores. Todos hoje.</string>
 
-    <string name="url_base_video">https://player.vimeo.com</string>
-    <string name="url_alongamento_c21">https://player.vimeo.com/video/92465253</string>
+    <string name="path_video_base">/sdcard/</string>
+    <string name="url_base_video">http://www.orbitaldev.com.br</string>
+    <string name="video_alongamento_c21">Mobile.mp4</string>
+
+
     <string name="url_contracao">https://player.vimeo.com/video/92468174</string>
     <string name="url_respiracao">https://player.vimeo.com/video/92469853</string>
     <string name="url_ex_abdomen">https://player.vimeo.com/video/92471688</string>
@@ -86,6 +89,43 @@
     <string name="title_activity_n">NActivity</string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_video_test">VideoTestActivity</string>
+    <string name="title_activity_bonus_detox">BonusDetoxActivity</string>
+
+    <string name="titulo_evolucao">Evolução</string>
+    <string name="titulo_contato">Contato</string>
+    <string name="selecione_assunto">Selecione um assunto:</string>
+
+    <string-array name="assuntos_contato">
+        <item>Dúvidas</item>
+        <item>Sugestões</item>
+        <item>Reclamações</item>
+        <item>Outros</item>
+    </string-array>
+
+    <string name="duvidas_frequentes">Dúvidas Frequentes</string>
+    <string name="titulo_duvidas_frequentes">Confira abaixo as 10 perguntas mais frequentes.</string>
+    <string name="titulo_resposta_duvidas_frequentes">Antes de entrar em contato conosco, veja se sua dúvida foi respondida abaixo:</string>
+
+    <string name="pergunta1_duvidas_frequentes">1 - Pergunta 1 ?</string>
+    <string name="resposta1_duvidas_frequentes"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </string>
+
+    <string name="pergunta2_duvidas_frequentes">2 - Pergunta 2 ?</string>
+    <string name="resposta2_duvidas_frequentes">Lorem ipos asd resposta.</string>
+
+    <string name="pergunta3_duvidas_frequentes">3 - Pergunta 3 ?</string>
+    <string name="resposta3_duvidas_frequentes">Lorem ipos asd resposta.</string>
+    <string name="title_activity_contato">ContatoActivity</string>
+    <string name="title_activity_medidas">MedidasActivity</string>
+
+
+
+
+
 
 
     <!--"Dificuldade: Fácil\nTempo de Video: 05:16\nNeste vídeo vou te mostrar como contrair o abdômen. Você irá aprender e aplicar em todo o curso."

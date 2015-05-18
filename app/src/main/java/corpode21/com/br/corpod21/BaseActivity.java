@@ -1,7 +1,6 @@
 package corpode21.com.br.corpod21;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 
 import android.view.Menu;
@@ -26,10 +24,11 @@ import corpode21.com.br.corpod21.Util.SessionManager;
 import corpode21.com.br.corpod21.fragments.AlertaRefeicaoFragment;
 import corpode21.com.br.corpod21.fragments.BonusFragment;
 import corpode21.com.br.corpod21.fragments.CardapioFragment;
+import corpode21.com.br.corpod21.ui.ContatoActivity;
 import corpode21.com.br.corpod21.fragments.DesafioSemanaFragment;
+import corpode21.com.br.corpod21.fragments.DuvidasFrequentesFragment;
 import corpode21.com.br.corpod21.fragments.ModulosFragment;
 import corpode21.com.br.corpod21.ui.EvolucaoActivity;
-import corpode21.com.br.corpod21.ui.LoginActivity2;
 
 /**
  * Created by Fabio on 09/04/2015.
@@ -240,6 +239,12 @@ public abstract class BaseActivity extends ActionBarActivity {
                 break;
             case MENU_ALERTAS:
                 openFragment(new AlertaRefeicaoFragment());
+                break;
+            case MENU_DUVIDAS:
+                openFragment(new DuvidasFrequentesFragment());
+                break;
+            case MENU_CONTATO:
+                goActivity(ContatoActivity.class);
                 break;
 
         }

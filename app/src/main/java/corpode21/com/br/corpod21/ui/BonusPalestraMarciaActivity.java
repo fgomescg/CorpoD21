@@ -25,7 +25,7 @@ public class BonusPalestraMarciaActivity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Palestra Márcia Luz","Como Alcançar seus Objetivos e Melhorar sua Autoestima", "1" ));
+        cards.add(montaCards("Palestra Márcia Luz","Como Alcançar seus Objetivos e Melhorar sua Autoestima",getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
     }
 
 }

@@ -25,7 +25,7 @@ public class BonusExAbdomenActivity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Bônus abdômen","5 Exercícios para abdômen", "1" ));
+        cards.add(montaCards("Bônus abdômen","5 Exercícios para abdômen" ,getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
     }
 
 }

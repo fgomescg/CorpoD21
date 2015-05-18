@@ -23,7 +23,7 @@ public class Modulo0Activity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Alongamento",getString(R.string.alongamento_c21), getString(R.string.url_alongamento_c21)));
+        cards.add(montaCards("Alongamento",getString(R.string.alongamento_c21), getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
     }
 
 }

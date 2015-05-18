@@ -25,11 +25,11 @@ public class BonusCompulsaoAlimentActivity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Vídeo 1","Introdução", "1" ));
-        cards.add(montaCards("Vídeo 2","O que é TFT?", "2" ));
-        cards.add(montaCards("Vídeo 3","Como funciona o ciclo vicioso", "3" ));
-        cards.add(montaCards("Vídeo 4","Passos básicos", "4" ));
-        cards.add(montaCards("Vídeo 5","Encerramento", "5" ));
+        cards.add(montaCards("Vídeo 1","Introdução", getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Vídeo 2","O que é TFT?",  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Vídeo 3","Como funciona o ciclo vicioso",  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Vídeo 4","Passos básicos",  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Vídeo 5","Encerramento",  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
     }
 
 }

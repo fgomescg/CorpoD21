@@ -25,7 +25,7 @@ public class BonusPalestraRelacionamentoActivity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Palestra sobre relacionamento","Relacionamento", "1" ));
+        cards.add(montaCards("Palestra sobre relacionamento","Relacionamento", getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
     }
 
 }

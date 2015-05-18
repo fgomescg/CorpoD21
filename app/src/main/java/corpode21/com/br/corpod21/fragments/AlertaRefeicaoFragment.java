@@ -4,16 +4,8 @@ package corpode21.com.br.corpod21.fragments;
  * Created by Fabio on 15/04/2015.
  */
 
-import android.app.DownloadManager;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +15,13 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.Util.SessionManager;
-
 import corpode21.com.br.corpod21.service.ScheduleClient;
 
 /**
@@ -55,6 +47,7 @@ public class AlertaRefeicaoFragment extends Fragment implements
     SessionManager session;
 
     private int mHour, mMinute;
+    ScheduleClient scheduleClient;
 
 
     public AlertaRefeicaoFragment() {
@@ -65,7 +58,7 @@ public class AlertaRefeicaoFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.alerta_refeicao_fragment, container, false);
+        View v = inflater.inflate(R.layout.fragment_alerta_refeicao, container, false);
 
         ImageView clockCafe = (ImageView) v.findViewById(R.id.clockCafe);
         clockCafe.setOnClickListener(this);
@@ -120,7 +113,10 @@ public class AlertaRefeicaoFragment extends Fragment implements
         switchJantar.setOnCheckedChangeListener(switchClick);
         switchCeia.setOnCheckedChangeListener(switchClick);
 
-        porra();
+        // Create a new service client and bind our activity to this service
+        scheduleClient = new ScheduleClient(getActivity());
+        scheduleClient.doBindService();
+
         initFragment();
 
     }
@@ -163,6 +159,9 @@ public class AlertaRefeicaoFragment extends Fragment implements
 
             final String tag = buttonView.getTag().toString();
             final String onOFF = (isChecked) ? "1" : "0";
+
+                       // Get a reference to our date picker
+
 
             switch (tag) {
                 case "Cafe":
@@ -235,6 +234,21 @@ public class AlertaRefeicaoFragment extends Fragment implements
                         break;
                 }
 
+        int day = 17;
+        int month = 4;
+        int year = 2015;
+        // Create a new calendar set to the date chosen
+        // we set the time to midnight (i.e. the first minute of that day)
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 26);
+        c.set(Calendar.SECOND, 0);
+        // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
+        scheduleClient.setAlarmForNotification(c);
+        // Notify the user what they just did
+        Toast.makeText(getActivity(), "Notification set for: " + day + "/" + (month + 1) + "/" + year, Toast.LENGTH_SHORT).show();
+
 
             // Launch Time Picker Dialog
             TimePickerDialog tpd = new TimePickerDialog(getActivity(),
@@ -277,42 +291,13 @@ public class AlertaRefeicaoFragment extends Fragment implements
         }
 
 
-
-    private void porra()    {
-
-        String url = "http://www.orbitaldev.com.br/Mobile.mp4";
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setDescription("Some descrition");
-        request.setTitle("Some title");
-// in order for this if to run, you must use the android 3.2 to compile your app
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            request.allowScanningByMediaScanner();
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        }
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Mobile.mp4");
-
-// get download service and enqueue file
-        DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-        manager.enqueue(request);
-    }
-    /**
-     * @param context used to check the device version and DownloadManager information
-     * @return true if the download manager is available
-     */
-    public static boolean isDownloadManagerAvailable(Context context) {
-        try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-                return false;
-            }
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            intent.setClassName("com.android.providers.downloads.ui", "com.android.providers.downloads.ui.DownloadList");
-            List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY);
-            return list.size() > 0;
-        } catch (Exception e) {
-            return false;
-        }
+    @Override
+    public void onStop() {
+        // When our activity is stopped ensure we also stop the connection to the service
+        // this stops us leaking our activity into the system *bad*
+        if(scheduleClient != null)
+            scheduleClient.doUnbindService();
+        super.onStop();
     }
 
 

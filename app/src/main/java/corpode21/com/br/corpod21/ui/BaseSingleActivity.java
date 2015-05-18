@@ -41,33 +41,31 @@ public abstract class BaseSingleActivity extends BaseActivity {
         }
     }
 
-    public Card montaCards(String titulo, String subTitulo, String urlVideo) {
+    public Card montaCards(String titulo, final String subTitulo, String urlBase, String Video) {
 
         //Create a CardHeader
         CardHeader header = new CardHeader(this);
-
         //Set the header title
         header.setTitle(titulo);
-
         //Create a Card
         Card card = new Card(this,R.layout.carddemo_example_inner_content);
-
         //Set the card inner text
         card.setTitle(subTitulo);
-
         //add header on card
         card.addCardHeader(header);
-
         //Card url Vídeo
-        card.setUrlVideo(urlVideo);
-
+        card.setUrlBaseVideo(urlBase);
+        //Card Name Video
+        card.setVideo(Video);
 
         //Set onClick listener
         card.setOnClickListener(new Card.OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
                 Intent it = new Intent(getApplicationContext(), VideoActivity.class);
-                it.putExtra("urlVideo", card.getUrlVideo());
+                it.putExtra("URL_BASE", card.getUrlBaseVideo());
+                it.putExtra("NOME_VIDEO", card.getVideo());
+                it.putExtra("SUBTITULO_VIDEO", subTitulo);
                 startActivity(it);
                 finish();
             }
@@ -78,3 +76,4 @@ public abstract class BaseSingleActivity extends BaseActivity {
         return card;
     }
 }
+

@@ -27,12 +27,12 @@ public class Modulo04Activity extends BaseSingleActivity {
     {
         cards = new ArrayList<>();
 
-        cards.add(montaCards("1° dia",getString(R.string.super_queima), getString(R.string.url_super_queima) ));
-        cards.add(montaCards("2° dia",getString(R.string.top_treino), getString(R.string.url_top_treino) ));
-        cards.add(montaCards("3° dia",getString(R.string.rapido_e_furioso), getString(R.string.url_rapido_furioso) ));
-        cards.add(montaCards("4° dia",getString(R.string.super_queima), getString(R.string.url_super_queima) ));
-        cards.add(montaCards("5° dia",getString(R.string.top_treino), getString(R.string.url_top_treino) ));
-        cards.add(montaCards("6° e 7°dia",getString(R.string.alongamento), getString(R.string.url_alongamento_c21)));
+        cards.add(montaCards("1° dia",getString(R.string.super_queima),getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("2° dia",getString(R.string.top_treino), getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("3° dia",getString(R.string.rapido_e_furioso), getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("4° dia",getString(R.string.super_queima), getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("5° dia",getString(R.string.top_treino), getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("6° e 7°dia",getString(R.string.alongamento), getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
 
     }
 }

@@ -25,12 +25,12 @@ public class Modulo01Activity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Dia 1", getString(R.string.contracao),getString(R.string.url_contracao)));
-        cards.add(montaCards("Dia 1", getString(R.string.respiracao), getString(R.string.url_contracao) ));
-        cards.add(montaCards("Dia 2", getString(R.string.ex_abdomen), getString(R.string.url_contracao) ));
-        cards.add(montaCards("Dia 3", getString(R.string.ex_pernas_gluteos), getString(R.string.url_contracao)));
-        cards.add(montaCards("Dia 4", getString(R.string.ex_bracos), getString(R.string.url_contracao) ));
-        cards.add(montaCards("Dia 5", getString(R.string.repita), getString(R.string.url_contracao) ));
+        cards.add(montaCards("Dia 1", getString(R.string.contracao), getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Dia 1", getString(R.string.respiracao),  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Dia 2", getString(R.string.ex_abdomen),  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Dia 3", getString(R.string.ex_pernas_gluteos),  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Dia 4", getString(R.string.ex_bracos),  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
+        cards.add(montaCards("Dia 5", getString(R.string.repita),  getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
 
     }
 }

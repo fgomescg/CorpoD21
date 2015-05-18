@@ -123,7 +123,7 @@ public class Chronometer extends TextView {
 
         text += df.format(minutes) + ":";
         text += df.format(seconds) + ":";
-        text += Integer.toString(milliseconds);
+        text += "0"+ Integer.toString(milliseconds);
 
         setText(text);
     }

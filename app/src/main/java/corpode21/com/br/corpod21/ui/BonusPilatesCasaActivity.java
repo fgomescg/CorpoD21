@@ -25,7 +25,7 @@ public class BonusPilatesCasaActivity extends BaseSingleActivity {
     protected void preencheCards()
     {
         cards = new ArrayList<>();
-        cards.add(montaCards("Pilátes em casa","Faça você mesma", "1" ));
+        cards.add(montaCards("Pilátes em casa","Faça você mesma",getString(R.string.url_super_queima), getString(R.string.video_alongamento_c21)));
     }
 
 }

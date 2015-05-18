@@ -28,6 +28,7 @@ import java.util.List;
 import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.Util.AlertManager;
 
+import corpode21.com.br.corpod21.Util.SessionManager;
 import corpode21.com.br.corpod21.entidades.Usuario;
 
 public class LoginActivity extends Activity  implements Runnable  {
@@ -36,6 +37,8 @@ public class LoginActivity extends Activity  implements Runnable  {
     EditText edtSenha;
     Button btLogin;
     Usuario usuario;
+
+    SessionManager session;
 
     // Alert  Manager
     AlertManager alert = new AlertManager();
@@ -50,7 +53,6 @@ public class LoginActivity extends Activity  implements Runnable  {
 
 
     public void chamarWS() {
-
 
         //Objeto composto pelo NameSpace e pelo método que queremos chamar
         SoapObject soap = new SoapObject("http://api.leadlovers.com/api/",
@@ -69,16 +71,11 @@ public class LoginActivity extends Activity  implements Runnable  {
 
         HttpTransportSE httpTransport = new HttpTransportSE(url);
 
-
         try{
             httpTransport.call("http://tempuri.org/GetToken", envelope);
-
             Object msg = envelope.getResponse();
-
             Log.d("WSERVICE", "Resposta: " + msg);
-
             dialog.dismiss();
-
         }
             catch (Exception e) {
                 Log.e("GB", "CATH Login!");
@@ -86,7 +83,6 @@ public class LoginActivity extends Activity  implements Runnable  {
             }
 
     }
-
 
 
     @Override
@@ -99,7 +95,6 @@ public class LoginActivity extends Activity  implements Runnable  {
 
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
-
         btLogin = (Button) findViewById(R.id.btnLogin);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -137,23 +132,22 @@ public class LoginActivity extends Activity  implements Runnable  {
             }
 
             if(ok){
-
                // dialog = ProgressDialog.show(LoginActivity.this, "", "Por Favor, aguarde...", true);
-
                 //new Thread(this).start();
 
                 //TODO Login 70if(retorno == "ok")
                 usuario = new Usuario(nome,email,senha,0,0,0,0,0,0,0,null);
 
-                SharedPreferences prefs = getSharedPreferences("c21_user_email", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("email", email);
-                editor.commit();
+                session = new SessionManager(getApplicationContext());
 
-                Intent it = new Intent(getApplicationContext(), LoginActivity2.class);
+                session.createLoginSession(usuario);
+
+                Intent it = new Intent(getApplicationContext(), MainActivity.class);
                 it.putExtra("Usuario", usuario);
                 startActivity(it);
                 finish();
+
+
             }
       }
 

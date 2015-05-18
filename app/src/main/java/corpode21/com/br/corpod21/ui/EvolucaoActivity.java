@@ -26,6 +26,9 @@ public class EvolucaoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evolucao);
 
+        setActionBarBackArrow();
+        setBarTitle(getString(R.string.titulo_evolucao));
+
         XYSeries series = new XYSeries("Peso");
 
         // We start filling the series
@@ -41,7 +44,7 @@ public class EvolucaoActivity extends BaseActivity {
 
         // Now we create the renderer
         XYSeriesRenderer renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.BLUE);
+        renderer.setColor(Color.RED);
         // Include low and max value
         renderer.setDisplayBoundingPoints(true);
 

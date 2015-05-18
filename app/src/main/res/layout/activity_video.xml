@@ -10,7 +10,6 @@
         layout="@layout/tool_bar">
     </include>
 
-
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -35,9 +34,11 @@
               android:background="@drawable/round"
               android:onClick="startChronometer"
               android:layout_gravity="center_horizontal"
+              android:layout_marginRight="42dp"
+              android:layout_marginEnd="42dp"
               android:layout_centerVertical="true"
-              android:layout_toLeftOf="@+id/chronometer"
-              android:layout_toStartOf="@+id/chronometer" />
+              android:layout_alignRight="@+id/chronometer"
+              android:layout_alignEnd="@+id/chronometer" />
 
           <Button
               android:id="@+id/button2"
@@ -47,9 +48,11 @@
               android:background="@drawable/round"
               android:onClick="stopChronometer"
               android:layout_gravity="center_horizontal"
-              android:layout_alignBottom="@+id/button1"
-              android:layout_toRightOf="@+id/chronometer"
-              android:layout_toEndOf="@+id/chronometer" />
+              android:layout_marginLeft="48dp"
+              android:layout_marginStart="48dp"
+              android:layout_alignTop="@+id/button1"
+              android:layout_alignLeft="@+id/chronometer"
+              android:layout_alignStart="@+id/chronometer" />
     </RelativeLayout>
 
     <VideoView
