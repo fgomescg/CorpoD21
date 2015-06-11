@@ -68,4 +68,9 @@
         <item name="android:background">@drawable/edittext_rounded</item>
         <item name="android:textColorHint">@color/button_material_light</item>
     </style>
+
+    <style name="WheelDemoTheme.Light" parent="android:Theme.Light">
+    </style>
+    <style name="WheelDemoTheme" parent="android:Theme">
+    </style>
 </resources>

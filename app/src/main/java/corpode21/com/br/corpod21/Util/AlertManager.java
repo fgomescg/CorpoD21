@@ -11,7 +11,7 @@ import corpode21.com.br.corpod21.R;
  */
 public class AlertManager {
 
-    public void showAlertDialog(Context context, String title, String message,
+    public static void showAlertDialog(Context context, String title, String message,
                                 Boolean status) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
@@ -34,6 +34,4 @@ public class AlertManager {
         // Showing Alert Message
         alertDialog.show();
     }
-
-
 }

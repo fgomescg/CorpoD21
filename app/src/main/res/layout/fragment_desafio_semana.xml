@@ -4,7 +4,8 @@
     tools:context="corpode21.com.br.corpod21.fragments.DesafioSemanaFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <TextView android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:text="@string/em_construcao"
+        android:gravity="center"/>
 
 </FrameLayout>

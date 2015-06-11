@@ -4,6 +4,7 @@ package corpode21.com.br.corpod21;
  * Created by Fabio on 24/03/2015.
  */
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
     private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
+    private String profile;        //int Resource for header view profile picture
     private String email;       //String Resource for header view email
     Context context;
 
@@ -72,7 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile,Context passedContext){ // MyAdapter Constructor with titles and icons parameter
+    MyAdapter(String Titles[],int Icons[],String Name,String Email, String Profile,Context passedContext){ // MyAdapter Constructor with titles and icons parameter
         // titles, icons, name, email, profile pic are passed from the main activity as we
         mNavTitles = Titles;                //have seen earlier
         mIcons = Icons;
@@ -115,7 +116,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             //holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
         }
         else{
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
+            if(profile != null) {
+                if ((String.valueOf(profile).contains(".jpg") || (String.valueOf(profile).contains(".png")))){
+                    holder.profile.setImageURI(Uri.parse(context.getFilesDir() + "/" + profile));           // Similarly we set the resources for header view
+                } else {
+                    holder.profile.setImageResource(R.drawable.add_foto);
+                }
+            }
+
             holder.Name.setText(name);
             holder.email.setText(email);
         }

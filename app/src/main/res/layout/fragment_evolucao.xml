@@ -1,0 +1,290 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_evolucao">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peso Inicial"
+            android:textSize="16sp"
+            android:id="@+id/Medidas" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/pesoIni"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/Medidas" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/custom_progressbar"
+            android:layout_width="180dp"
+            android:layout_height="20dp"
+            android:id="@+id/progressBar"
+
+            android:layout_below="@+id/Medidas"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peso Meta"
+            android:textSize="16sp"
+            android:id="@+id/Medidas"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/pesoMeta"
+            android:layout_below="@+id/Medidas"
+            android:layout_alignRight="@+id/Medidas"
+            android:layout_alignEnd="@+id/Medidas" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:padding="20dp"
+        android:id="@+id/viewChart"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/medidas"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/Medidas" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/inicial"
+                android:id="@+id/Inicial"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/atual"
+                android:id="@+id/Atual"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/biceps"
+               android:id="@+id/txtBiceps"
+               android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:textSize="20sp"
+               android:id="@+id/iBiceps"
+               android:gravity="center"
+               android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:id="@+id/aBiceps"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cintura"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/iCintura"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/aCintura"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/quadril"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/iQuadril"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/aQuadril"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/perna"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/iPerna"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/aPerna"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+     <!--   <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Glúteos"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="22"
+                android:textSize="20sp"
+                android:id="@+id/iGluteo"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="22"
+                android:id="@+id/aGluteo"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:gravity="center" />
+
+        </LinearLayout> -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:text="Atualizar Dados"
+                android:background="@drawable/button_rounded"
+                android:textColor="@color/TextoBranco"
+                android:id="@+id/btnAtualizarDados" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

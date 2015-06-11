@@ -1,7 +1,10 @@
 package corpode21.com.br.corpod21.Util;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +15,16 @@ import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.ui.LoginActivity;
 import corpode21.com.br.corpod21.entidades.Usuario;
 
+import com.google.gson.Gson;
+
+import corpode21.com.br.corpod21.entidades.SemanaEvolucao;
+
 public class SessionManager {
     // Shared Preferences
     SharedPreferences pref;
     SharedPreferences pref_email;
 
+    public static final String SEMANAS = "Semana_Evolucao";
 
     private static final String PREF_EMAIL_USER = "c21_user_email";
 
@@ -30,20 +38,16 @@ public class SessionManager {
     // Shared pref mode
     int PRIVATE_MODE = 0;
 
+    public String EMAIL;
+
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
     public static final String KEY_EMAIL = "email";
-    public static final String KEY_PESO_INI = "peso_ini";
-    public static final String KEY_ALTURA = "altura";
-    public static final String KEY_PESO_META = "peso_meta";
-    public static final String KEY_BICEPS = "biceps";
-    public static final String KEY_CINTURA = "cintura";
-    public static final String KEY_QUADRIL = "quadril";
-    public static final String KEY_PERNA = "perna";
-
+    public static final String KEY_FOTO = "foto";
+    public static final String KEY_FIRST_TIME = "first_time";
     public static final String KEY_HCAFE = "hCafe";
     public static final String KEY_NCAFE = "nCafe";
     public static final String KEY_HLANCHEMANHA = "hLancheManha";
@@ -58,17 +62,16 @@ public class SessionManager {
     public static final String KEY_NCEIA = "nCeia";
 
 
-
     // Constructor
     public SessionManager(Context context) {
         this._context = context;
 
         pref_email = _context.getSharedPreferences(PREF_EMAIL_USER, PRIVATE_MODE);
 
-        String email = pref_email.getString("email",null);
+        EMAIL = pref_email.getString("email",null);
 
-        if(email != null)
-            pref = _context.getSharedPreferences(PREF_USER+email, PRIVATE_MODE);
+        if(EMAIL != null)
+            pref = _context.getSharedPreferences(PREF_USER + EMAIL, PRIVATE_MODE);
         else
             pref = _context.getSharedPreferences(PREF_USER, PRIVATE_MODE);
 
@@ -81,31 +84,26 @@ public class SessionManager {
 
         editor.putString(KEY_NAME, usuario.getNome());
         editor.putString(KEY_EMAIL, usuario.getEmail());
+        editor.putString(KEY_FOTO, usuario.getImage());
+        editor.putString(KEY_FIRST_TIME, "1");
 
-        editor.putString(KEY_PESO_INI, String.valueOf(usuario.getPesoIni()));
-        editor.putString(KEY_ALTURA, String.valueOf(usuario.getAltura()));
-        editor.putString(KEY_PESO_META, String.valueOf(usuario.getPesoMeta()));
-        editor.putString(KEY_BICEPS, String.valueOf(usuario.getBiceps()));
-        editor.putString(KEY_CINTURA, String.valueOf(usuario.getCintura()));
-        editor.putString(KEY_QUADRIL, String.valueOf(usuario.getQuadril()));
-        editor.putString(KEY_PERNA, String.valueOf(usuario.getPerna()));
+        editor.putString(KEY_HCAFE, _context.getString(R.string.hora_Cafe));
+        editor.putString(KEY_HLANCHEMANHA, _context.getString(R.string.hora_LancheManha));
+        editor.putString(KEY_HALMOCO, _context.getString(R.string.hora_Almoco));
+        editor.putString(KEY_HLANCHETARDE, _context.getString(R.string.hora_LancheTarde));
+        editor.putString(KEY_HJANTAR, _context.getString(R.string.hora_Jantar));
+        editor.putString(KEY_HCEIA, _context.getString(R.string.hora_Ceia));
 
-        editor.putString(KEY_HCAFE, "07:00");
-        editor.putString(KEY_HLANCHEMANHA, "09:30");
-        editor.putString(KEY_HALMOCO, "12:00");
-        editor.putString(KEY_HLANCHETARDE, "15:30");
-        editor.putString(KEY_HJANTAR, "19:00");
-        editor.putString(KEY_HCEIA, "22:00");
-
-        editor.putString(KEY_NCAFE, String.valueOf(0));
-        editor.putString(KEY_NLANCHEMANHA, String.valueOf(0));
-        editor.putString(KEY_NALMOCO, String.valueOf(0));
-        editor.putString(KEY_NLANCHETARDE, String.valueOf(0));
-        editor.putString(KEY_NJANTAR, String.valueOf(0));
-        editor.putString(KEY_NCEIA, String.valueOf(0));
+        editor.putString(KEY_NCAFE, String.valueOf(false));
+        editor.putString(KEY_NLANCHEMANHA, String.valueOf(false));
+        editor.putString(KEY_NALMOCO, String.valueOf(false));
+        editor.putString(KEY_NLANCHETARDE, String.valueOf(false));
+        editor.putString(KEY_NJANTAR, String.valueOf(false));
+        editor.putString(KEY_NCEIA, String.valueOf(false));
         // commit changes
         editor.commit();
     }
+
 
     public void setUserDetails(String KEY, String VALUE)
     {
@@ -122,13 +120,8 @@ public class SessionManager {
         // user name
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
-        user.put(KEY_PESO_INI, pref.getString(KEY_PESO_INI, null));
-        user.put(KEY_ALTURA, pref.getString(KEY_ALTURA, null));
-        user.put(KEY_PESO_META, pref.getString(KEY_PESO_META, null));
-        user.put(KEY_BICEPS, pref.getString(KEY_BICEPS, null));
-        user.put(KEY_CINTURA, pref.getString(KEY_CINTURA, null));
-        user.put(KEY_QUADRIL, pref.getString(KEY_QUADRIL, null));
-        user.put(KEY_PERNA, pref.getString(KEY_PERNA, null));
+        user.put(KEY_FOTO, pref.getString(KEY_FOTO, null));
+        user.put(KEY_FIRST_TIME, pref.getString(KEY_FIRST_TIME, null));
 
         // return user
         return user;
@@ -183,5 +176,54 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
+
+    public void saveSemanas(List<SemanaEvolucao> Semanas)
+    {
+        Gson gson = new Gson();
+        String jsonSemanas = gson.toJson(Semanas);
+        editor.putString(SEMANAS, jsonSemanas);
+
+        editor.commit();
+    }
+
+    public void removeSemana(SemanaEvolucao semana) {
+        ArrayList<SemanaEvolucao> semanas = getSemanas(_context);
+        if (semanas != null) {
+            semanas.remove(semana);
+            saveSemanas(semanas);
+        }
+    }
+
+    public void addSemana(Context context, SemanaEvolucao Semana) {
+        List<SemanaEvolucao> semanas = getSemanas(context);
+        if (semanas == null)
+            semanas = new ArrayList<>();
+        semanas.add(Semana);
+        saveSemanas(semanas);
+    }
+
+    public ArrayList<SemanaEvolucao> getSemanas(Context context) {
+        SharedPreferences settings;
+        List<SemanaEvolucao> semanas;
+
+        if(EMAIL == null)
+            EMAIL = pref_email.getString("email",null);
+
+        settings = context.getSharedPreferences(PREF_USER + EMAIL,
+                Context.MODE_PRIVATE);
+
+        if (settings.contains(SEMANAS)) {
+            String jsonFavorites = settings.getString(SEMANAS, null);
+            Gson gson = new Gson();
+            SemanaEvolucao[] semanaItens = gson.fromJson(jsonFavorites,
+                    SemanaEvolucao[].class);
+
+            semanas = Arrays.asList(semanaItens);
+            semanas = new ArrayList<>(semanas);
+        } else
+            return null;
+
+        return (ArrayList<SemanaEvolucao>) semanas;
+    }
 
 }

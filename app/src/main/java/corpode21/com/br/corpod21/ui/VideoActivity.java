@@ -6,24 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.webkit.WebView;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,10 +36,10 @@ import corpode21.com.br.corpod21.Util.Chronometer;
 import corpode21.com.br.corpod21.Util.SessionManager;
 
 
-public class VideoActivity extends BaseSingleActivity {
+public class VideoActivity extends ActionBarActivity {
 
     SessionManager session;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
+    private Toolbar mToolBar;                              // Declaring the Toolbar Object
     private String TituloVideo;
     private Chronometer mChronometer;
 
@@ -52,28 +50,46 @@ public class VideoActivity extends BaseSingleActivity {
     ProgressDialog mProgressDialog;
 
     //Nome do Vídeo
-    private String NomeVideo;
+    private String NOMEARQUIVO;
     //Url onde será baixado o vídeo
     private String urlBaseVideo;
+    DownloadVideo downloadVideo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        mVideoView = (VideoView)findViewById(R.id.videoView);
-        mChronometer = (Chronometer)findViewById(R.id.chronometer);
+        mToolBar = (Toolbar) findViewById(R.id.tool_bar);
+        mVideoView = (VideoView) findViewById(R.id.videoView);
+        mChronometer = (Chronometer) findViewById(R.id.chronometer);
 
         Intent it = getIntent();
         urlBaseVideo = it.getStringExtra("URL_BASE");
-        NomeVideo = it.getStringExtra("NOME_VIDEO");
+        NOMEARQUIVO = it.getStringExtra("NOME_VIDEO");
         TituloVideo = it.getStringExtra("SUBTITULO_VIDEO");
 
         setActionBarBackArrow();
         setBarTitle(TituloVideo);
 
-        if(NomeVideo != "")
-            Init();
+        Init();
+
+    }
+
+    public void setActionBarBackArrow()
+    {
+        mToolBar.setNavigationIcon(R.mipmap.ic_up21);
+        setSupportActionBar(mToolBar);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    public void setBarTitle(String s)
+    {
+        getSupportActionBar().setTitle(s);
     }
 
     @Override
@@ -109,6 +125,7 @@ public class VideoActivity extends BaseSingleActivity {
     public void onResume() {
         super.onResume();
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -116,26 +133,21 @@ public class VideoActivity extends BaseSingleActivity {
 
     //endregion
 
-
     //Metodos
-    protected void Init()
-    {
-        File file = new File(this.getFilesDir() +"/"+ NomeVideo);
-        if(file.exists()) {
+    protected void Init() {
+        File file = new File(this.getFilesDir() + "/" + NOMEARQUIVO + ".mp4");
+        if (file.exists()) {
             IniciarVideo();
-        }
-        else {
+        } else {
             DownloadVideo();
         }
     }
 
-
-
-    protected void IniciarVideo()
-    {
+    protected void IniciarVideo() {
         try {
+            verificaEstadoAquivo();
             //set the uri of the video to be played
-            mVideoView.setVideoURI(Uri.parse(this.getFilesDir() +"/"+ NomeVideo));
+            mVideoView.setVideoURI(Uri.parse(this.getFilesDir() + "/" + NOMEARQUIVO + ".mp4"));
 
             mVideoView.requestFocus();
             //we also set an setOnPreparedListener in order to know when the video file is ready for playback
@@ -163,24 +175,45 @@ public class VideoActivity extends BaseSingleActivity {
                         mVideoView.pause();
                     }
                 }
-        });
+            });
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
     }
 
-    protected void DownloadVideo()
-    {
+    protected void DownloadVideo() {
+        if(isOnline()) {
 
-        mProgressDialog = new ProgressDialog(VideoActivity.this);
-        mProgressDialog.setMessage("Por favor, aguarde...");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
+            mProgressDialog = new ProgressDialog(VideoActivity.this);
+            mProgressDialog.setMessage(getString(R.string.mensagem_aguarde));
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Finish();
+                }
+            });
 
-        final DownloadVideo downloadVideo = new DownloadVideo(VideoActivity.this);
-        downloadVideo.execute(urlBaseVideo + "/" + NomeVideo);
+            downloadVideo = new DownloadVideo(VideoActivity.this);
+            downloadVideo.execute(urlBaseVideo + NOMEARQUIVO + ".mp4");
+        }else{
+
+            mProgressDialog = new ProgressDialog(VideoActivity.this);
+            mProgressDialog.setMessage(getString(R.string.mensagem_conexao));
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Finish();
+                }
+            });
+            mProgressDialog.show();
+        }
+
 
         mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
@@ -190,18 +223,16 @@ public class VideoActivity extends BaseSingleActivity {
         });
     }
 
-    private void setFullScreen()
-    {
+    private void setFullScreen() {
         //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+        mToolBar.animate().translationY(-mToolBar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-    private void leaveFullScreen()
-    {
+    private void leaveFullScreen() {
         //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+        mToolBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     }
@@ -217,7 +248,7 @@ public class VideoActivity extends BaseSingleActivity {
 
 
     // usually, subclasses of AsyncTask are declared inside the activity class.
-// that way, you can easily modify the UI thread from here
+    // that way, you can easily modify the UI thread from here
     private class DownloadVideo extends AsyncTask<String, Integer, String> {
 
         private Context context;
@@ -251,16 +282,10 @@ public class VideoActivity extends BaseSingleActivity {
                 int fileLength = connection.getContentLength();
 
                 // download the file
-                //input = connection.getInputStream();
-                input = new BufferedInputStream(connection.getInputStream());
+                input = connection.getInputStream();
 
                 //Define InputStreams to read from the URLConnection.
-                //output = new FileOutputStream("/sdcard/file_name.extension");
-                Log.d("SALVANDO", context.getFilesDir() +"/"+ NomeVideo);
-                //FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-
-                //output = new FileOutputStream(context.getCacheDir() + "/video.mp4");
-                output = new FileOutputStream(context.getFilesDir() +"/"+ NomeVideo);
+                output = new FileOutputStream(context.getFilesDir() + "/" + NOMEARQUIVO +".tmp");
 
                 byte data[] = new byte[4096];
 
@@ -270,7 +295,8 @@ public class VideoActivity extends BaseSingleActivity {
                     // allow canceling with back button
                     if (isCancelled()) {
                         input.close();
-                        return null;
+                        output.close();
+                        return "Download cancelado.";
                     }
                     total += count;
                     // publishing the progress....
@@ -278,6 +304,7 @@ public class VideoActivity extends BaseSingleActivity {
                         publishProgress((int) (total * 100 / fileLength));
                     output.write(data, 0, count);
                 }
+
             } catch (Exception e) {
                 return e.toString();
             } finally {
@@ -322,13 +349,53 @@ public class VideoActivity extends BaseSingleActivity {
             mWakeLock.release();
             mProgressDialog.dismiss();
             if (result != null)
-                Toast.makeText(context,"Download error: "+result, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Download error: " + result, Toast.LENGTH_LONG).show();
             else
-                Toast.makeText(context,TituloVideo + " baixado com sucesso !", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,TituloVideo + " baixado com sucesso !", Toast.LENGTH_SHORT).show();
                 //Iniciar o vídeo após o download
+                verificaEstadoAquivo();
                 IniciarVideo();
         }
 
     }
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        //return netInfo != null && netInfo.isConnectedOrConnecting();
+        return netInfo != null && netInfo.isConnected();
+    }
+
+    protected void verificaEstadoAquivo()
+    {
+        File fileTmp = new File(this.getFilesDir() + "/" + NOMEARQUIVO + ".tmp");
+        File fileMp4 = new File(this.getFilesDir() + "/" + NOMEARQUIVO + ".mp4");
+        if (fileTmp.exists()) {
+            fileTmp.renameTo(fileMp4);
+        }
+
+        delTempFiles(new File(this.getFilesDir()+"/"));
+
+    }
+
+    private void delTempFiles(File parentDir) {
+        File[] files = parentDir.listFiles();
+        for (File file : files) {
+            if(file.getName().endsWith(".tmp")){
+                file.delete();
+            }
+        }
+    }
+
+    protected void Finish() {
+        mProgressDialog.dismiss();
+        if (downloadVideo != null)
+            downloadVideo.cancel(true);
+
+        this.finish();
+    }
 }
+
+
+

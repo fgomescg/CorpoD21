@@ -6,21 +6,29 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
-        <service android:name=".service.ScheduleService" />
-        <service android:name=".service.NotifyService" />
+       <!-- <receiver android:name=".service.OnBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".service.OnAlarmReceiver" >
+        </receiver>
+        <service android:name=".service.TaskButlerService" /> -->
 
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,45 +38,7 @@
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppThemeWindowNoTitle"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name=".ui.LoginActivity2"
-            android:label="@string/title_activity_login_activity2"
-            android:theme="@style/AppThemeWindowNoTitle"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo0Activity"
-            android:label="@string/title_activity_modulo0" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo01Activity"
-            android:label="@string/title_activity_modulo01" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo02Activity"
-            android:label="@string/title_activity_modulo02" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo03Activity"
-            android:label="@string/title_activity_modulo03" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo04Activity"
-            android:label="@string/title_activity_modulo04" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo05Activity"
-            android:label="@string/title_activity_modulo05" >
-        </activity>
-        <activity
-            android:name=".ui.Modulo06Activity"
-            android:label="@string/title_activity_modulo06" >
-        </activity>
-        <activity
-            android:name=".ui.VideoPlayerActivity"
-            android:label="@string/title_activity_video_player" >
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".ui.VideoActivity"
@@ -76,63 +46,19 @@
             android:label="@string/title_activity_video" >
         </activity>
         <activity
-            android:name=".ui.BonusPalestraMarciaActivity"
-            android:label="BonusPalestraMarciaActivity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusCompulsaoAlimentActivity"
-            android:label="BonusCompulsaoAlimentActivity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusPalestraRelacionamentoActivity"
-            android:label="BonusPalestraRelacionamentoActivity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusExAbdomenActivity"
-            android:label="BonusExAbdomenActivity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusDetoxActivity"
-            android:label="BonusDetoxActivity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusDietaC21Activity"
-            android:label="BonusDietaC21Activity" >
-        </activity>
-        <activity
-            android:name=".ui.BonusPilatesCasaActivity"
-            android:label="BonusPilatesCasaActivity" >
-        </activity>
-        <activity
             android:name=".TesteNotificacao"
-            android:label="@string/title_activity_teste_notificacao" >
+            android:label="@string/title_activity_teste_notificacao">
         </activity>
         <activity
             android:name=".DetalheActivity"
-            android:label="@string/title_activity_detalhe" >
+            android:label="@string/title_activity_detalhe">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TesteNotificacao" />
         </activity>
         <activity
-            android:name=".ui.EvolucaoActivity"
-            android:label="@string/title_activity_evolucao" >
-        </activity>
-
-        <service android:name=".service.ScheduleService" />
-        <service android:name=".service.NotifyService" />
-
-        <activity
-            android:name=".ui.RespostaDuvidasActivity"
-            android:label="@string/titulo_duvidas_frequentes" >
-        </activity>
-        <activity
-            android:name=".ui.ContatoActivity"
-            android:label="@string/title_activity_contato" >
-        </activity>
-        <activity
             android:name=".MedidasActivity"
-            android:label="@string/title_activity_medidas" >
+            android:label="@string/title_activity_medidas">
         </activity>
     </application>
 

@@ -21,6 +21,4 @@ public class DetalheActivity extends ActionBarActivity {
         txt.setText(string);
     }
 
-
-
 }

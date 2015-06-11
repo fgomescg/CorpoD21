@@ -1,20 +1,16 @@
 package corpode21.com.br.corpod21.fragments;
 
-
-import android.app.TimePickerDialog;
-import android.content.Intent;
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
-
 
 import corpode21.com.br.corpod21.R;
-import corpode21.com.br.corpod21.ui.RespostaDuvidasActivity;
+
 
 /**
  * Created by Fabio on 14/05/2015.
@@ -26,8 +22,18 @@ public class DuvidasFrequentesFragment extends Fragment implements
     private TextView pergunta2;
     private TextView pergunta3;
 
+    public final  String TAG = "DuvidasFrequentesFragment";
+
+    private FragmentActivity myContext;
+
     public DuvidasFrequentesFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     @Override
@@ -53,10 +59,21 @@ public class DuvidasFrequentesFragment extends Fragment implements
     @Override
     public void onClick(View v) {
 
-        final String tag = v.getTag().toString();
+        final String perguntaId = v.getTag().toString();
+        openFragment(new RespostaDuvidasFragment(), perguntaId);
 
-        Intent it = new Intent(getActivity(), RespostaDuvidasActivity.class);
-        it.putExtra("pergunta", tag);
-        startActivity(it);
+    }
+
+    private void openFragment(final Fragment fragment, String perguntaId) {
+        myContext.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right)
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(TAG)
+                .commit();
+        //Passando parametros para o Fragment
+        Bundle args = new Bundle();
+        args.putString("PERGUNTAID", perguntaId);
+        fragment.setArguments(args);
     }
 }

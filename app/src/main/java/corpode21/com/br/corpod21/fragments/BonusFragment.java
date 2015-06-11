@@ -1,9 +1,10 @@
 package corpode21.com.br.corpod21.fragments;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import corpode21.com.br.corpod21.ui.BonusCompulsaoAlimentActivity;
-import corpode21.com.br.corpod21.ui.BonusDetoxActivity;
-import corpode21.com.br.corpod21.ui.BonusDietaC21Activity;
-import corpode21.com.br.corpod21.ui.BonusExAbdomenActivity;
-import corpode21.com.br.corpod21.ui.BonusPalestraMarciaActivity;
-import corpode21.com.br.corpod21.ui.BonusPalestraRelacionamentoActivity;
-import corpode21.com.br.corpod21.ui.BonusPilatesCasaActivity;
 import corpode21.com.br.corpod21.R;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardGridArrayAdapter;
@@ -32,9 +26,18 @@ import it.gmariotti.cardslib.library.view.CardGridView;
 public class BonusFragment extends Fragment {
 
     ArrayList<Card> cards;
+    private FragmentActivity myContext;
+
+    public final  String TAG = "BonusFragment";
 
     public BonusFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     @Override
@@ -92,7 +95,7 @@ public class BonusFragment extends Fragment {
         card.setOnClickListener(new Card.OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
-                changeFragment(card.getId());
+                openFragment(new ModuloFragment(), card.getId());
             }
         });
 
@@ -135,53 +138,31 @@ public class BonusFragment extends Fragment {
         }
     }
 
-
-    private void changeFragment(String IdModulo) {
-        // update the main content by replacing fragments
-        switch (IdModulo)
-        {
-            case "00":
-                goActivity(BonusPalestraMarciaActivity.class);
-                break;
-            case "01":
-                goActivity(BonusExAbdomenActivity.class);
-                break;
-            case "02":
-                goActivity(BonusDetoxActivity.class);
-                break;
-            case "03":
-                goActivity(BonusDietaC21Activity.class);
-                break;
-            case "04":
-                goActivity(BonusPilatesCasaActivity.class);
-                break;
-            case "05":
-                goActivity(BonusCompulsaoAlimentActivity.class);
-                break;
-            case "06":
-                goActivity(BonusPalestraRelacionamentoActivity.class);
-                break;
-        }
-
+    private void openFragment(final Fragment fragment, String moduloId) {
+        myContext.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right)
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(TAG)
+                .commit();
+        //Passando parametros para o Fragment
+        Bundle args = new Bundle();
+        args.putString("MODULOID", moduloId);
+        fragment.setArguments(args);
     }
 
 
-    private void goActivity(Class c) {
-
-        Intent it = new Intent(getActivity().getApplicationContext(), c);
-        //it.putExtra("Usuario", usuario);
-        startActivity(it);
-    }
 
     private void getCards()
     {
-        cards.add(cardGridModulos("Por: Márcia Luz","Palestra Márcia Luz",R.drawable.img_bonus_0, "00"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","Exercícios para abdômen",R.drawable.img_bonus_1, "01"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","Detox 2 Dias",R.drawable.img_bonus_2, "02"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","Dieta CorpoD21",R.drawable.img_bonus_3, "03"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","Pilátes em casa",R.drawable.img_bonus_4, "04"));
-        cards.add(cardGridModulos("Por: Leandro Precário","Supere a compulsão alimentar",R.drawable.img_bonus_5, "05"));
-        cards.add(cardGridModulos("Por: Rodrigo Cardoso e Rosana Braga","Palestra sobre relacionamento",R.drawable.img_bonus_6, "06"));
+        //cards.add(cardGridModulos("Por: Márcia Luz","Palestra Márcia Luz",R.drawable.img_bonus_0, "07"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.ex_abdomen),R.drawable.img_bonus_1, "08"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"Pilátes em casa",R.drawable.img_bonus_4, "09"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.detox_2_dias),R.drawable.img_bonus_2, "10"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"Dieta CorpoD21",R.drawable.img_bonus_3, "11"));
+
+       // cards.add(cardGridModulos("Por: Leandro Precário","Supere a compulsão alimentar",R.drawable.img_bonus_5, "12"));
+        //cards.add(cardGridModulos("Por: Rodrigo Cardoso e Rosana Braga","Palestra sobre relacionamento",R.drawable.img_bonus_6, "13"));
 
     }
 

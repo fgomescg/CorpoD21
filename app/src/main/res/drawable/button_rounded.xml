@@ -5,7 +5,7 @@
         android:width="1dp"
         android:color="@color/colorPrimaryDark" />
 
-    <solid android:color="@color/VermelhoBotao" />
+    <solid android:color="@color/background_floating_material_dark" />
 
     <padding
         android:left="1dp"

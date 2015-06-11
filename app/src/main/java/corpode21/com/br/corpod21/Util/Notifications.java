@@ -9,11 +9,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import corpode21.com.br.corpod21.DetalheActivity;
+import corpode21.com.br.corpod21.MainActivity;
 import corpode21.com.br.corpod21.R;
 
 /**
@@ -27,11 +28,11 @@ public class Notifications {
 
     private  static PendingIntent criarPendingIntent(Context ctx, String texto, int id) {
 
-        Intent resultIntent = new Intent(ctx, DetalheActivity.class);
-        resultIntent.putExtra(DetalheActivity.EXTRA_TEXTO, texto);
+        Intent resultIntent = new Intent(ctx, MainActivity.class);
+        resultIntent.putExtra("FRAGMENT_ID", id);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(ctx);
-        stackBuilder.addParentStack(DetalheActivity.class);
+        stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(resultIntent);
 
         return stackBuilder.getPendingIntent(
@@ -78,10 +79,67 @@ public class Notifications {
                 .setDeleteIntent(pitDelete)
                 .setLights(Color.BLUE, 1000, 5000)
                 .setSound(uriSom)
-                .setVibrate(new long[]{100,500,200,800})
+                .setVibrate(new long[]{100, 500, 200, 800})
                 .addAction(R.drawable.ic_acao_notificacao, "Ação Customizada", pitAcao)
                 .setNumber(id)
                 .setSubText("Subtexto");
+
+        NotificationManagerCompat nm = NotificationManagerCompat.from(ctx);
+        nm.notify(id, mBuilder.build());
+    }
+
+    public static void criarNotificacaoRefeicao(Context ctx, String texto, int id)
+    {
+        PendingIntent pitAcao = PendingIntent.getBroadcast(ctx, 0, new Intent(ACAO_NOTIFICACAO), 0);
+        PendingIntent pitDelete = PendingIntent.getBroadcast(ctx, 0, new Intent(ACAO_DELETE), 0);
+        Bitmap largeIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_notification_c21);
+        PendingIntent pitNotificacao = criarPendingIntent(ctx, texto, 5); //5 = Cardapio
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(ctx)
+                        .setSmallIcon(R.drawable.ic_notification_c21)
+                        .setContentTitle("CorpoD21")
+                        .setContentText("Alerta de Refeição")
+                        .setTicker("Alerta Refeição C21")
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setWhen(System.currentTimeMillis())
+                        .setLargeIcon(largeIcon)
+                        .setAutoCancel(true)
+                        .setContentIntent(pitAcao)
+                        .setDeleteIntent(pitDelete)
+                        .setLights(Color.WHITE, 1000, 5000)
+                        .setVibrate(new long[]{100, 500, 200, 800})
+                        .addAction(0, "Ver cardápio", pitNotificacao)
+                        .setNumber(id)
+                        .setSubText(texto);
+
+        NotificationManagerCompat nm = NotificationManagerCompat.from(ctx);
+        nm.notify(id, mBuilder.build());
+    }
+
+    public static void criarNotificacaoParabens(Context ctx, String texto, int id)
+    {
+        PendingIntent pitAcao = PendingIntent.getBroadcast(ctx, 0, new Intent(ACAO_NOTIFICACAO), 0);
+        PendingIntent pitDelete = PendingIntent.getBroadcast(ctx, 0, new Intent(ACAO_DELETE), 0);
+        Bitmap largeIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_notification_c21);
+        PendingIntent pitNotificacao = criarPendingIntent(ctx, texto, 5); //5 = Cardapio
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(ctx)
+                        .setSmallIcon(R.drawable.ic_notification_c21)
+                        .setContentTitle("CorpoD21")
+                        .setContentText("Evolução CorpoD21")
+                        .setTicker("Alerta Evolução C21")
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setWhen(System.currentTimeMillis())
+                        .setLargeIcon(largeIcon)
+                        .setAutoCancel(true)
+                        .setContentIntent(pitAcao)
+                        .setDeleteIntent(pitDelete)
+                        .setLights(Color.WHITE, 1000, 5000)
+                        .setVibrate(new long[]{100, 500, 200, 800})
+                        .setNumber(id)
+                        .setSubText(texto);
 
         NotificationManagerCompat nm = NotificationManagerCompat.from(ctx);
         nm.notify(id, mBuilder.build());

@@ -1,24 +1,17 @@
 package corpode21.com.br.corpod21.fragments;
 
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import corpode21.com.br.corpod21.ui.Modulo01Activity;
-import corpode21.com.br.corpod21.ui.Modulo02Activity;
-import corpode21.com.br.corpod21.ui.Modulo03Activity;
-import corpode21.com.br.corpod21.ui.Modulo04Activity;
-import corpode21.com.br.corpod21.ui.Modulo05Activity;
-import corpode21.com.br.corpod21.ui.Modulo06Activity;
-import corpode21.com.br.corpod21.ui.Modulo0Activity;
 import corpode21.com.br.corpod21.R;
 import it.gmariotti.cardslib.library.internal.*;
 import it.gmariotti.cardslib.library.view.CardGridView;
@@ -29,16 +22,27 @@ import it.gmariotti.cardslib.library.view.CardGridView;
 public class ModulosFragment extends Fragment {
 
     ArrayList<Card> cards;
+    private FragmentActivity myContext;
+
+    public final  String TAG = "ModulosFragment";
 
     public ModulosFragment() {
         // Required empty public constructor
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.base_fragment_cards, container, false);
+
         // Inflate the layout for this fragment
-        return  inflater.inflate(R.layout.base_fragment_cards, container, false);
+        return  v;
 
     }
 
@@ -70,7 +74,9 @@ public class ModulosFragment extends Fragment {
         //Create a Card
         Card card = new Card(getActivity());
         //Create a CardHeader
+        //CustomHeaderInnerCard header = new CustomHeaderInnerCard(getActivity());
         CustomHeaderInnerCard header = new CustomHeaderInnerCard(getActivity());
+
         //Set the header title
         header.setTitulo1(titulo1);
         header.setTitulo2(titulo2);
@@ -89,7 +95,7 @@ public class ModulosFragment extends Fragment {
         card.setOnClickListener(new Card.OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
-                changeFragment(card.getId());
+                openFragment(new ModuloFragment(), card.getId());
             }
         });
 
@@ -131,52 +137,28 @@ public class ModulosFragment extends Fragment {
     }
 
 
-    private void changeFragment(String IdModulo) {
-        // update the main content by replacing fragments
-        switch (IdModulo)
-        {
-            case "00":
-                goActivity(Modulo0Activity.class);
-                break;
-            case "01":
-                goActivity(Modulo01Activity.class);
-                break;
-            case "02":
-                goActivity(Modulo02Activity.class);
-                break;
-            case "03":
-                goActivity(Modulo03Activity.class);
-                break;
-            case "04":
-                goActivity(Modulo04Activity.class);
-                break;
-            case "05":
-                goActivity(Modulo05Activity.class);
-                break;
-            case "06":
-                goActivity(Modulo06Activity.class);
-                break;
-        }
-
-    }
-
-
-    private void goActivity(Class c) {
-
-        Intent it = new Intent(getActivity().getApplicationContext(), c);
-        //it.putExtra("Usuario", usuario);
-        startActivity(it);
+    private void openFragment(final Fragment fragment, String moduloId) {
+        myContext.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right)
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(TAG)
+                .commit();
+        //Passando parametros para o Fragment
+        Bundle args = new Bundle();
+        args.putString("MODULOID", moduloId);
+        fragment.setArguments(args);
     }
 
     private void getCards()
     {
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 0",R.drawable.img_modulo_0, "00"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 01",R.drawable.img_modulo_1, "01"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 02",R.drawable.img_modulo_2, "02"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 03",R.drawable.img_modulo_3, "03"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 04",R.drawable.img_modulo_4, "04"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 05",R.drawable.img_modulo_5, "05"));
-        cards.add(cardGridModulos("Por: Olivia Andriolo","MÓDULO 06",R.drawable.img_modulo_6, "06"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia), "MÓDULO 0", R.drawable.img_modulo_0, "00"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 01",R.drawable.img_modulo_1, "01"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 02",R.drawable.img_modulo_2, "02"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 03",R.drawable.img_modulo_3, "03"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 04",R.drawable.img_modulo_4, "04"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 05",R.drawable.img_modulo_5, "05"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),"MÓDULO 06",R.drawable.img_modulo_6, "06"));
     }
 
 }

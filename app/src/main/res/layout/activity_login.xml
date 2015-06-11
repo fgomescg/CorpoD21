@@ -4,8 +4,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:fillViewport="true"
-android:padding="50dp"
-android:background="#ffb2b2b2" >
+android:padding="30dp"
+android:background="#ff000000" >
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -13,17 +13,19 @@ android:background="#ffb2b2b2" >
     android:orientation="vertical" >
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="left"
-        android:src="@drawable/corpod21"
-        android:layout_marginBottom="40dp" />
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/corpod21" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:imeOptions="actionNext"
+        android:layout_marginBottom="5dp"
         android:hint="E-mail"
+        android:text="fabio@orbitaldev.com.br"
         android:id="@+id/edtEmail"
         android:inputType="textEmailAddress"
         style="@style/SingleLineEdit"/>
@@ -32,14 +34,15 @@ android:background="#ffb2b2b2" >
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:hint="Senha"
+        android:text="0D4"
         android:inputType="textPassword"
         android:id="@+id/edtSenha"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         style="@style/SingleLineEdit"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
         android:text="LOGIN"
         android:background="@drawable/button_rounded"
@@ -50,10 +53,12 @@ android:background="#ffb2b2b2" >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/abc_primary_text_material_light"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/white"
         android:text="@string/LinkPrograma"
         android:id="@+id/txtLinkPrograma"
         android:gravity="center" />
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
