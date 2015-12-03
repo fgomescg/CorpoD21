@@ -1,12 +1,19 @@
 package corpode21.com.br.corpod21.fragments;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +24,7 @@ import android.widget.TextView;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.BarChart;
+import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -29,8 +37,10 @@ import corpode21.com.br.corpod21.MainActivity;
 import corpode21.com.br.corpod21.MedidasActivity;
 import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.Util.GMailSender;
+import corpode21.com.br.corpod21.Util.Notifications;
 import corpode21.com.br.corpod21.Util.SessionManager;
 import corpode21.com.br.corpod21.entidades.SemanaEvolucao;
+import corpode21.com.br.corpod21.service.OnAlarmReceiver;
 
 /**
  * Created by Fabio on 22/05/2015.
@@ -125,32 +135,56 @@ public class EvolucaoFragment extends Fragment {
 
     protected void InitChart(){
 
-        XYSeries series = new XYSeries("Peso");
+        // Bar 1
+        Double maxValue = 100.0;
+        CategorySeries series = new CategorySeries("");
 
-        // We start filling the series
         for (SemanaEvolucao semana: semanas) {
-            series.add(semana.getId(), Float.parseFloat(semana.getPeso().replace(",", ".")));
+            series.add("Bar " + (semana.getId()), Double.parseDouble(semana.getPeso().replace(",",".")));
+            if(semana.getId() == 1)
+            {
+                maxValue  = Double.parseDouble(semana.getPeso().replace(",",".")) + 20;
+            }
         }
 
-        // Now we create the renderer
-        XYSeriesRenderer renderer = new XYSeriesRenderer();
-        renderer.setColor(Color.GREEN);
-        // Include low and max value
-        renderer.setDisplayBoundingPoints(true);
-
-
-        // Now we add our series
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(series);
-        // Finaly we create the multiple series renderer to control the graph
+        dataset.addSeries(series.toXYSeries());
+
+        // This is how the "Graph" itself will look like
         XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-        mRenderer.addSeriesRenderer(renderer);
-        // We want to avoid black border
-        mRenderer.setMarginsColor(Color.argb(0x00, 0xff, 0x00, 0x00)); // transparent margins
-        // Disable Pan on two axis
+        //mRenderer.setChartTitle("Demo Graph Title");
+        mRenderer.setXTitle("SEMANAS");
+        mRenderer.setYTitle("PESO");
+
         mRenderer.setPanEnabled(false, false);
-        mRenderer.setShowGrid(true); // we show the grid
-        mRenderer.setBarSpacing(1);
+        mRenderer.setZoomEnabled(false, false);
+        mRenderer.setAxesColor(Color.GREEN);
+        mRenderer.setLabelsColor(Color.RED);
+        mRenderer.setMarginsColor(Color.argb(0x00, 0xff, 0x00, 0x00)); // transparent margins
+
+        DisplayMetrics metrics = myContext.getResources().getDisplayMetrics();
+        float val = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, metrics);
+
+        mRenderer.setAxisTitleTextSize(35);
+
+        mRenderer.setLabelsTextSize(val - 3);
+        mRenderer.setBarSpacing(0.5);
+        mRenderer.setBarWidth(70);
+        mRenderer.setXAxisMin(0);
+        mRenderer.setXAxisMax(6);
+        mRenderer.setYAxisMin(0);
+        mRenderer.setYAxisMax(maxValue);
+
+        // Customize bar 1
+        XYSeriesRenderer renderer = new XYSeriesRenderer();
+        renderer.setDisplayChartValues(true);
+        renderer.setChartValuesSpacing((float) 0.5);
+        renderer.setLineWidth((float) 1);
+        renderer.setShowLegendItem(false);
+        renderer.setChartValuesTextSize(35);
+        renderer.setColor(Color.RED);
+
+        mRenderer.addSeriesRenderer(renderer);
 
         GraphicalView chartView = ChartFactory.getBarChartView(myContext, dataset, mRenderer, BarChart.Type.DEFAULT);
 
@@ -162,8 +196,8 @@ public class EvolucaoFragment extends Fragment {
 
     private void preencheDados()
     {
-        PesoIni.setText(iSemana.getPeso());
-        PesoMeta.setText(iSemana.getPesoMeta());
+        PesoIni.setText(iSemana.getPeso().concat("kg"));
+        PesoMeta.setText(iSemana.getPesoMeta().concat("kg"));
 
         float PesoIni = Float.parseFloat(iSemana.getPeso().replace(",","."));
         float PesoMeta = Float.parseFloat(iSemana.getPesoMeta().replace(",", "."));

@@ -1,7 +1,11 @@
 package corpode21.com.br.corpod21;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -18,9 +22,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import corpode21.com.br.corpod21.Util.Notifications;
 import corpode21.com.br.corpod21.Util.SessionManager;
 import corpode21.com.br.corpod21.entidades.SemanaEvolucao;
 import corpode21.com.br.corpod21.fragments.EvolucaoFragment;
+import corpode21.com.br.corpod21.service.OnAlarmReceiver;
 import corpode21.com.br.corpod21.spinnerwheel.AbstractWheel;
 import corpode21.com.br.corpod21.spinnerwheel.adapters.ArrayWheelAdapter;
 
@@ -96,8 +102,7 @@ public class MedidasActivity extends ActionBarActivity {
         });
     }
 
-    public void setBarTitle(String s)
-    {
+    public void setBarTitle(String s) {
         getSupportActionBar().setTitle(s);
     }
 
@@ -116,13 +121,13 @@ public class MedidasActivity extends ActionBarActivity {
         cinturaQuadril = new ArrayList<>();
 
         for (float i = 40.0f; i < 199.9f; i = i + 0.1f ){
-            weight.add(String.format("%.1f",i));
+            weight.add(String.format("%.1f",i).replace(".",","));
         }
         for (float i = 15.0f; i < 80.9f; i = i + 0.1f ){
-            bicepsperna.add(String.format("%.1f",i));
+            bicepsperna.add(String.format("%.1f",i).replace(".", ","));
         }
         for (float i = 30.0f; i < 179.9f; i = i + 0.1f ){
-            cinturaQuadril.add(String.format("%.1f",i));
+            cinturaQuadril.add(String.format("%.1f",i).replace(".",","));
         }
 
         listPesos = new ArrayWheelAdapter<>(myContext, weight);
@@ -242,21 +247,69 @@ public class MedidasActivity extends ActionBarActivity {
                     Toast.LENGTH_LONG).show();
         }
         finally {
-            Toast.makeText(myContext, "Peso e medidas atualizados com sucesso.",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(myContext, "Peso e medidas atualizados com sucesso.", Toast.LENGTH_LONG).show();
+
+
+            semanas = session.getSemanas(myContext);
+
+            if(semanas != null) {
+                if (semanas.size() > 0) {
+                    SemanaEvolucao iSemana = semanas.get(0);
+                    SemanaEvolucao aSemana = semanas.get(semanas.size() - 1);
+
+                    float PesoIni = Float.parseFloat(iSemana.getPeso().replace(",","."));
+                    float PesoMeta = Float.parseFloat(iSemana.getPesoMeta().replace(",", "."));
+                    float PesoAtual = Float.parseFloat(aSemana.getPeso().replace(",", "."));
+
+                    float PesoAperder = PesoIni - PesoMeta;
+                    float PesoPerdido = PesoIni - PesoAtual;
+
+                    float progress = (PesoPerdido / PesoAperder) * 100;
+
+                    if (Math.round(progress) >= 20 && Math.round(progress) <= 40)
+                        Notifications.criarNotificacaoParabens(myContext, getString(R.string.evolucao_p1), 0);
+                    if (Math.round(progress) >= 40 && Math.round(progress) <= 60)
+                        Notifications.criarNotificacaoParabens(myContext, getString(R.string.evolucao_p2), 0);
+                    if (Math.round(progress) >= 60 && Math.round(progress) <= 80)
+                        Notifications.criarNotificacaoParabens(myContext, getString(R.string.evolucao_p3), 0);
+                    if (Math.round(progress) >= 100)
+                        Notifications.criarNotificacaoParabens(myContext, getString(R.string.evolucao_p4), 0);
+
+                }
+            }
 
             goActivity(MainActivity.class);
-
         }
-
     }
 
-
     private void goActivity(Class c) {
-
         Intent it = new Intent(this.getApplicationContext(), c);
         it.putExtra("FRAGMENT_ID", 4);//Evolucao
         startActivity(it);
+    }
+
+    public void setAlarm(Context context, int ID_SEMANA, int DIA, int MES, int ANO){
+
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.clear();
+        cal.set(ANO, MES, DIA, 18, 16);
+
+        AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), getPendingIntent(context, ID_SEMANA));
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT){
+            am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), getPendingIntent(context, ID_SEMANA));
+        }else{
+            am.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), getPendingIntent(context, ID_SEMANA));
+        }
+    }
+
+    //get a PendingIntent
+    PendingIntent getPendingIntent(Context context, int id) {
+        Intent intent =  new Intent(context, OnAlarmReceiver.class).putExtra("ID_SEMANA", id);
+        return PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
 

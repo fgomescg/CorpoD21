@@ -1,5 +1,6 @@
 package corpode21.com.br.corpod21.ui;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,8 +30,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 
+import corpode21.com.br.corpod21.MedidasActivity;
 import corpode21.com.br.corpod21.R;
 import corpode21.com.br.corpod21.Util.Chronometer;
 import corpode21.com.br.corpod21.Util.SessionManager;
@@ -55,6 +58,7 @@ public class VideoActivity extends ActionBarActivity {
     private String urlBaseVideo;
     DownloadVideo downloadVideo;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
@@ -71,8 +75,46 @@ public class VideoActivity extends ActionBarActivity {
         setActionBarBackArrow();
         setBarTitle(TituloVideo);
 
-        Init();
+        session = new SessionManager(getApplicationContext());
 
+        session.checkLogin();
+        if (!session.isLoggedIn()) {
+            finish();
+        }
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        String FIRST_TIME_VIDEO = user.get(SessionManager.KEY_FIRST_TIME_VIDEO);
+
+        if(FIRST_TIME_VIDEO != null) {
+            if (FIRST_TIME_VIDEO.equals("1")) {
+                showAlertaConexao();
+            } else {
+                Init();
+            }
+        }
+    }
+
+    private void showAlertaConexao()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.treinamento_c21))
+                .setMessage(getString(R.string.msg_conexao))
+                .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Init();
+                    }
+                })
+                .setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setIcon(R.mipmap.ic_c21)
+                .show();
+
+        session.setUserDetails(session.KEY_FIRST_TIME_VIDEO, "0");
     }
 
     public void setActionBarBackArrow()

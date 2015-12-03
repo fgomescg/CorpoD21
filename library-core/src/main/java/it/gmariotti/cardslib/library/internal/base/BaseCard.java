@@ -19,6 +19,7 @@
 package it.gmariotti.cardslib.library.internal.base;
 
 import android.content.Context;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,12 @@ public abstract class BaseCard implements CardUIInferface {
     /**
      * Url vídeo
      */
-    protected String urlVideo;
+    protected String urlBaseVideo;
+
+    /**
+     * Nome do vídeo
+     */
+    protected String Video;
 
     /**
      * Id Card
@@ -199,22 +205,33 @@ public abstract class BaseCard implements CardUIInferface {
     }
 
     /**
-     * Retrieves the card id
+     * Retrieves the name of the video
      *
-     * @return id
+     * @return string
      */
-    public String getUrlVideo() {
-        return urlVideo;
+    public String getVideo() { return Video;  }
+    /**
+     * Set the name video
+     *
+     * @param video
+     */
+    public void setVideo(String video) { this.Video = video;   }
+
+    /**
+     * Retrieves the base url Video
+     *
+     * @return string
+     */
+    public String getUrlBaseVideo() {
+        return urlBaseVideo;
     }
 
     /**
-     * Set the card id
+     * Set the base url Video
      *
      * @param url
      */
-    public void setUrlVideo(String url) {
-        urlVideo = url;
-    }
+    public void setUrlBaseVideo(String url) {  this.urlBaseVideo = url;  }
     /**
      * Retrieves the card id
      *

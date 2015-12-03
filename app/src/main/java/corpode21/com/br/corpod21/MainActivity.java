@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -132,7 +133,7 @@ public class MainActivity extends ActionBarActivity {
 
                     }
                 })
-                .setIcon(R.drawable.ic_notification_c21)
+                .setIcon(R.mipmap.ic_c21)
                 .show();
 
         session.setUserDetails(session.KEY_FIRST_TIME, "0");
@@ -333,8 +334,9 @@ public class MainActivity extends ActionBarActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, fragment,"mainFragment")
                 .commit();
+
         //Passando parametros para o Fragment
         if(FIRST_TIME == "1") {
             Bundle args = new Bundle();
@@ -346,11 +348,6 @@ public class MainActivity extends ActionBarActivity {
     //Voltar uma tela ao clicar no botao back
     @Override
     public void onBackPressed(){
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-
-            getSupportFragmentManager().popBackStack();
-        } else {
 
             new AlertDialog.Builder(this)
                     .setTitle(R.string.titulo_sair)
@@ -359,9 +356,9 @@ public class MainActivity extends ActionBarActivity {
                     .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface arg0, int arg1) {
-                            MainActivity.super.onBackPressed();
+                            //MainActivity.super.onBackPressed();
+                            finish();
                         }
                     }).create().show();
-        }
     }
 }

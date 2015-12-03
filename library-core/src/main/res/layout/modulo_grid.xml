@@ -36,8 +36,9 @@
 
         <it.gmariotti.cardslib.library.view.component.CardHeaderView
             android:id="@+id/card_header_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <!-- Main Content View -->
     </LinearLayout>

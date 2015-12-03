@@ -8,8 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="20dp"
+        android:layout_height="70dp"
+        android:padding="10dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
 
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="Peso Inicial"
             android:textSize="16sp"
-            android:id="@+id/Medidas" />
+            android:id="@+id/MedidaIni" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:textSize="16sp"
             android:id="@+id/pesoIni"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/Medidas" />
+            android:layout_below="@+id/MedidaIni" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:id="@+id/progressBar"
 
-            android:layout_below="@+id/Medidas"
+            android:layout_below="@+id/MedidaIni"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Peso Meta"
             android:textSize="16sp"
-            android:id="@+id/Medidas"
+            android:id="@+id/MedidaMeta"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -53,17 +53,17 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:id="@+id/pesoMeta"
-            android:layout_below="@+id/Medidas"
-            android:layout_alignRight="@+id/Medidas"
-            android:layout_alignEnd="@+id/Medidas" />
+            android:layout_below="@+id/MedidaMeta"
+            android:layout_alignRight="@+id/MedidaMeta"
+            android:layout_alignEnd="@+id/MedidaMeta" />
 
 
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:padding="5dp"
         android:id="@+id/viewChart"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
@@ -266,22 +266,20 @@
 
         </LinearLayout> -->
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent" >
 
             <Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:text="Atualizar Dados"
                 android:background="@drawable/button_rounded"
                 android:textColor="@color/TextoBranco"
                 android:id="@+id/btnAtualizarDados" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

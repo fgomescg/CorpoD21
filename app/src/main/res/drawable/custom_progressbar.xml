@@ -4,6 +4,7 @@
     <!-- Define the background properties like color etc -->
     <item android:id="@android:id/background">
         <shape>
+            <corners android:radius="10dip"/>
             <gradient
                 android:startColor="#b2cccccc"
                 android:centerColor="#b2cccccc"
@@ -18,6 +19,7 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
+                 <corners android:radius="10dip"/>
                 <gradient
                     android:startColor="#ff00c009"
                     android:centerColor="#ff00ac00"

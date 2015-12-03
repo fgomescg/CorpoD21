@@ -151,20 +151,11 @@ public class BonusFragment extends Fragment {
         fragment.setArguments(args);
     }
 
-
-
     private void getCards()
     {
-        //cards.add(cardGridModulos("Por: Márcia Luz","Palestra Márcia Luz",R.drawable.img_bonus_0, "07"));
         cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.ex_abdomen),R.drawable.img_bonus_1, "08"));
-        cards.add(cardGridModulos(getString(R.string.por_olivia),"Pilátes em casa",R.drawable.img_bonus_4, "09"));
+        cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.pilates_casa),R.drawable.img_bonus_4, "09"));
         cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.detox_2_dias),R.drawable.img_bonus_2, "10"));
-        cards.add(cardGridModulos(getString(R.string.por_olivia),"Dieta CorpoD21",R.drawable.img_bonus_3, "11"));
-
-       // cards.add(cardGridModulos("Por: Leandro Precário","Supere a compulsão alimentar",R.drawable.img_bonus_5, "12"));
-        //cards.add(cardGridModulos("Por: Rodrigo Cardoso e Rosana Braga","Palestra sobre relacionamento",R.drawable.img_bonus_6, "13"));
-
+        cards.add(cardGridModulos(getString(R.string.por_olivia),getString(R.string.dieta_c21),R.drawable.img_bonus_3, "11"));
     }
-
-
 }

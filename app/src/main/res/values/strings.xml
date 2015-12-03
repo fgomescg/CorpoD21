@@ -7,8 +7,6 @@
     <string name="por_olivia">Por: Olivia Andriolo</string>
     <string name="dieta_c21">Dieta CorpoD21</string>
     <string name="detox_2_dias">Detox 2 dias</string>
-    <string name="palestra_marcia">Palestra Márcia Luz</string>
-    <string name="como_alcancar">Como Alcançar seus Objetivos e Melhorar sua Autoestima</string>
     <string name="bonus_abdomen">Bônus abdômen</string>
     <string name="ex_abdomen_5">5 Exercícios para abdômen</string>
     <string name="pilates_casa">Pilátes em casa"</string>
@@ -18,13 +16,6 @@
     <string name="nao">Não</string>
     <string name="agora_nao">Agora não</string>
     <string name="mais_tarde">Mais tarde</string>
-
-    <string name="video1">Vídeo 1</string>
-    <string name="video2">Vídeo 2</string>
-    <string name="video3">Vídeo 3</string>
-    <string name="video4">Vídeo 4</string>
-    <string name="video5">Vídeo 5</string>
-
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -136,7 +127,7 @@
 
     <string name="titulo_evolucao">Evolução</string>
     <string name="titulo_contato">Contato</string>
-    <string name="selecione_assunto">Selecione um assunto:</string>
+    <string name="selecione_assunto">Selecione um assunto</string>
 
     <string name="mensagem_aguarde">Por favor, aguarde...</string>
     <string name="mensagem_conexao">Por favor, verifique a conexão com a internet e tente novamente.</string>
@@ -177,6 +168,19 @@
 
     <string name="titulo_sair">Sair</string>
     <string name="saida_confirmacao">Deseja realmente sair do CorpoD21?</string>
+
+
+    <string name="evolucao_p1">Parabéns, continue assim.</string>
+    <string name="evolucao_p2">Você está evoluindo muito bem.</string>
+    <string name="evolucao_p3">Não desista agora, estamos quase lá!</string>
+    <string name="evolucao_p4">Parabéns, você alcançou sua meta!</string>
+
+    <string name="treinamento_c21">Treinamento CorpoD21</string>
+    <string name="msg_conexao">É recomendado o download dos nossos vídeos via Wi-Fi, ou poderá ocorrer cobranças adicionais em seu pacote de dados.
+        Uma vez baixado, você não precisará baixa-lo novamente. Deseja continuar ? </string>
+
+
+
 
 
 </resources>

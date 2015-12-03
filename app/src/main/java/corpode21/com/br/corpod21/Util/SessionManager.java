@@ -48,6 +48,7 @@ public class SessionManager {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_FOTO = "foto";
     public static final String KEY_FIRST_TIME = "first_time";
+    public static final String KEY_FIRST_TIME_VIDEO = "first_time_video";
     public static final String KEY_HCAFE = "hCafe";
     public static final String KEY_NCAFE = "nCafe";
     public static final String KEY_HLANCHEMANHA = "hLancheManha";
@@ -86,7 +87,7 @@ public class SessionManager {
         editor.putString(KEY_EMAIL, usuario.getEmail());
         editor.putString(KEY_FOTO, usuario.getImage());
         editor.putString(KEY_FIRST_TIME, "1");
-
+        editor.putString(KEY_FIRST_TIME_VIDEO, "1");
         editor.putString(KEY_HCAFE, _context.getString(R.string.hora_Cafe));
         editor.putString(KEY_HLANCHEMANHA, _context.getString(R.string.hora_LancheManha));
         editor.putString(KEY_HALMOCO, _context.getString(R.string.hora_Almoco));
@@ -122,6 +123,7 @@ public class SessionManager {
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_FOTO, pref.getString(KEY_FOTO, null));
         user.put(KEY_FIRST_TIME, pref.getString(KEY_FIRST_TIME, null));
+        user.put(KEY_FIRST_TIME_VIDEO, pref.getString(KEY_FIRST_TIME_VIDEO, null));
 
         // return user
         return user;

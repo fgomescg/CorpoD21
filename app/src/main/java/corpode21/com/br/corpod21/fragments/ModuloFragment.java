@@ -105,15 +105,15 @@ public class ModuloFragment extends Fragment  {
                 cards.add(montaCards(getString(R.string.segundo_dia),getString(R.string.ex_abdomen), getString(R.string.url_base_video), getString(R.string.video_modulo_abdomen)));
                 cards.add(montaCards(getString(R.string.terceiro_dia),getString(R.string.top_treino), getString(R.string.url_base_video), getString(R.string.video_top_treino)));
                 cards.add(montaCards(getString(R.string.quarto_dia),getString(R.string.ex_pernas_gluteos),getString(R.string.url_base_video), getString(R.string.video_pernas_gluteos)));
-                cards.add(montaCards(getString(R.string.quinto_dia),getString(R.string.rapido_e_furioso), getString(R.string.url_base_video), getString(R.string.rapido_e_furioso)));
+                cards.add(montaCards(getString(R.string.quinto_dia),getString(R.string.rapido_e_furioso), getString(R.string.url_base_video), getString(R.string.video_rapido_furioso)));
                 cards.add(montaCards(getString(R.string.sexto_set_dia), getString(R.string.alongamento), getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
                 break;
             case "04":
                 cards.add(montaCards(getString(R.string.primeiro_dia),getString(R.string.super_queima),getString(R.string.url_base_video), getString(R.string.video_super_queima)));
                 cards.add(montaCards(getString(R.string.segundo_dia),getString(R.string.top_treino), getString(R.string.url_base_video), getString(R.string.video_top_treino)));
                 cards.add(montaCards(getString(R.string.terceiro_dia),getString(R.string.rapido_e_furioso), getString(R.string.url_base_video), getString(R.string.video_rapido_furioso)));
-                cards.add(montaCards(getString(R.string.quarto_dia),getString(R.string.super_queima), getString(R.string.url_base_video), getString(R.string.super_queima)));
-                cards.add(montaCards(getString(R.string.quinto_dia),getString(R.string.top_treino), getString(R.string.url_base_video), getString(R.string.top_treino)));
+                cards.add(montaCards(getString(R.string.quarto_dia),getString(R.string.super_queima), getString(R.string.url_base_video), getString(R.string.video_super_queima)));
+                cards.add(montaCards(getString(R.string.quinto_dia),getString(R.string.top_treino), getString(R.string.url_base_video), getString(R.string.video_top_treino)));
                 cards.add(montaCards(getString(R.string.sexto_set_dia), getString(R.string.alongamento), getString(R.string.url_base_video), getString(R.string.video_alongamento_c21)));
                 break;
             case "05":

@@ -259,7 +259,6 @@ public class MedidasFragment extends Fragment {
         myContext.getSupportFragmentManager()
                 .beginTransaction()//.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right)
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack(TAG)
                 .commit();
     }
 

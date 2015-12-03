@@ -102,7 +102,7 @@ public class ContatoFragment extends Fragment {
 
     protected void sendEmail() {
         Log.i("Send email", "");
-        String[] TO = {"contato@corpode21.com.br"};
+        String[] TO = {"olivia@eumagra.com.br"};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
@@ -122,7 +122,7 @@ public class ContatoFragment extends Fragment {
             Log.i("Finished send email...", "");
         }
         catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(myContext, "Não foi encontrado nenhum prongrama de email instalado.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(myContext, "Nao foi encontrado nenhum prongrama de email instalado.", Toast.LENGTH_SHORT).show();
         }
     }
 
